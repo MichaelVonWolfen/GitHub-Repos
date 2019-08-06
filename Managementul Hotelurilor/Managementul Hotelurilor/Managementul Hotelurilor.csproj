@@ -49,6 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\Dal_Countries.cs" />
+    <Compile Include="DAL\DAL_Hotels.cs" />
+    <Compile Include="DAL\Dal_HotelServices.cs" />
+    <Compile Include="DAL\Dal_Locations.cs" />
+    <Compile Include="DAL\Dal_Rooms.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Hotels.cs" />
     <Compile Include="Entities\Hotel_Services.cs" />
@@ -88,8 +93,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
