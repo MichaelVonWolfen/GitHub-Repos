@@ -16,5 +16,16 @@ namespace Managementul_Hotelurilor
         {
             InitializeComponent();
         }
+
+
+        private void ComboBox_city_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ComboBox_Country_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
