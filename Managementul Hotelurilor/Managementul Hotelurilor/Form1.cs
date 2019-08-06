@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,18 +39,25 @@ namespace Managementul_Hotelurilor
             comboBox_Hotels.Enabled = true;
             comboBox_Hotels.Sorted = true;
             comboBox_Hotels.Items.Clear();
-
-            int ID = DAL.Dal_Locations.GetLocationID(comboBox_city.Text, DAL.GlobalDictionary.LocationDictionary);
-
-            DAL.DAL_Hotels hotels = new DAL.DAL_Hotels(ID);
-
-            foreach (string s in hotels.HotelsDictionary.Values)
+            try
             {
-                comboBox_Hotels.Items.Add(s);
+                int ID = DAL.Dal_Locations.GetLocationID(comboBox_city.Text, DAL.GlobalDictionary.LocationDictionary);
+
+                DAL.DAL_Hotels hotels = new DAL.DAL_Hotels(ID);
+
+                foreach (string s in hotels.HotelsDictionary.Values)
+                {
+                    comboBox_Hotels.Items.Add(s);
+                }
+                DAL.GlobalDictionary.HotelsDictionary = hotels.HotelsDictionary;
+
             }
-            DAL.GlobalDictionary.HotelsDictionary = hotels.HotelsDictionary;
-            //TO DO: Punere Hoteluri dintr-un oras intr-un combobox pentru hoteluri
-        }
+            catch (OracleException OEx)
+            {
+                MessageBox.Show(OEx.Message);
+            }
+    //TO DO: Punere Hoteluri dintr-un oras intr-un combobox pentru hoteluri
+}
         private void ComboBox_Country_SelectedValueChanged(object sender, EventArgs e)
         {
             comboBox_city.Enabled = true;
@@ -57,13 +65,20 @@ namespace Managementul_Hotelurilor
             comboBox_city.Items.Clear();
 
             int ID = DAL.Dal_Countries.GetCountryID(comboBox_Country.Text);
-
-            DAL.Dal_Locations Locatii = new DAL.Dal_Locations(ID);
-            foreach (string s in Locatii.LocationDictionary.Values)
+            try
             {
-                comboBox_city.Items.Add(s);
+                DAL.Dal_Locations Locatii = new DAL.Dal_Locations(ID);
+                foreach (string s in Locatii.LocationDictionary.Values)
+                {
+                    comboBox_city.Items.Add(s);
+                }
+                DAL.GlobalDictionary.LocationDictionary = Locatii.LocationDictionary;
+
             }
-            DAL.GlobalDictionary.LocationDictionary = Locatii.LocationDictionary;
+            catch (OracleException OEx)
+            {
+                MessageBox.Show(OEx.Message);
+            }
             //TO DO: ADD Elements from Location in a Combobox for location
         }
 
@@ -73,21 +88,35 @@ namespace Managementul_Hotelurilor
             comboBox_Country.Sorted = true;
             comboBox_Country.Items.Clear();
             b_Hotels.Enabled = false;
-
-            foreach (string s in DAL.Dal_Countries.CountriesDictionary.Values)
+            try
             {
-                comboBox_Country.Items.Add(s);
+                foreach (string s in DAL.Dal_Countries.CountriesDictionary.Values)
+                {
+                    comboBox_Country.Items.Add(s);
+                }
+
             }
-            //SOLVED: ADD  ELEMENTS FROM COUNTRY TABLE IN A COMBOBOX
-        }
+            catch (OracleException OEx)
+            {
+                MessageBox.Show(OEx.Message);
+            }
+    //SOLVED: ADD  ELEMENTS FROM COUNTRY TABLE IN A COMBOBOX
+}
 
         private void ComboBox_Hotels_SelectedIndexChanged(object sender, EventArgs e)
         {
             int ID = DAL.DAL_Hotels.GetHotelID(comboBox_Hotels.Text,DAL.GlobalDictionary.HotelsDictionary);
             availeble_Rooms_gridView.Enabled = true;
-            DataTable dataTable = DAL.Dal_Rooms.GetRooms(ID);
+            try
+            {
+                DataTable dataTable = DAL.Dal_Rooms.GetRooms(ID);
+                availeble_Rooms_gridView.DataSource = dataTable;
 
-            availeble_Rooms_gridView.DataSource = dataTable;
+            }
+            catch(OracleException OEx)
+            {
+                MessageBox.Show(OEx.Message);
+            }
         }
     }
 }
