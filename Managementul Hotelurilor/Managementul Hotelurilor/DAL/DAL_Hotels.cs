@@ -50,5 +50,15 @@ namespace Managementul_Hotelurilor.DAL
                 }
             }
         }
+
+        public static int GetHotelID(string s, Dictionary<int,string> keyValuePairs)
+        {
+            foreach(KeyValuePair<int,string> kV in keyValuePairs)
+            {
+                if (kV.Value == s)
+                    return kV.Key;
+            }
+            return 0;
+        }
     }
 }

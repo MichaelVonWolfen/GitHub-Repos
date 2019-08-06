@@ -83,7 +83,11 @@ namespace Managementul_Hotelurilor
 
         private void ComboBox_Hotels_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int ID = DAL.DAL_Hotels.GetHotelID(comboBox_Hotels.Text,DAL.GlobalDictionary.HotelsDictionary);
+            availeble_Rooms_gridView.Enabled = true;
+            DataTable dataTable = DAL.Dal_Rooms.GetRooms(ID);
 
+            availeble_Rooms_gridView.DataSource = dataTable;
         }
     }
 }

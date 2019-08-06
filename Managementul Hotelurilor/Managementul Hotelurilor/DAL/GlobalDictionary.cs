@@ -13,6 +13,6 @@ namespace Managementul_Hotelurilor.DAL
             get; set;
         }
         public static Dictionary<int, string> HotelsDictionary { get; set; }
-
+        
     }
 }
