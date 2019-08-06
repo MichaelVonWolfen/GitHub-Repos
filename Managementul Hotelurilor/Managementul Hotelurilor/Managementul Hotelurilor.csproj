@@ -37,6 +37,7 @@
       <HintPath>..\packages\Oracle.ManagedDataAccess.19.3.1\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +55,7 @@
     <Compile Include="DAL\Dal_HotelServices.cs" />
     <Compile Include="DAL\Dal_Locations.cs" />
     <Compile Include="DAL\Dal_Rooms.cs" />
+    <Compile Include="DAL\DatabaseConection.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Hotels.cs" />
     <Compile Include="Entities\Hotel_Services.cs" />

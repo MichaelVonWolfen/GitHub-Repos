@@ -59,6 +59,7 @@
             this.b_Reset.TabIndex = 1;
             this.b_Reset.Text = "Reset";
             this.b_Reset.UseVisualStyleBackColor = true;
+            this.b_Reset.Click += new System.EventHandler(this.B_Reset_Click);
             // 
             // comboBox_Country
             // 
@@ -78,6 +79,7 @@
             this.b_Hotels.TabIndex = 3;
             this.b_Hotels.Text = "Hotels";
             this.b_Hotels.UseVisualStyleBackColor = true;
+            this.b_Hotels.Click += new System.EventHandler(this.B_Hotels_Click);
             // 
             // b_Rooms
             // 

@@ -27,5 +27,23 @@ namespace Managementul_Hotelurilor
         {
 
         }
+
+        private void B_Reset_Click(object sender, EventArgs e)
+        {
+            comboBox_city.Text = "";
+            comboBox_city.Enabled = false;
+            comboBox_Country.Text = "";
+            comboBox_Country.Enabled = false;
+            comboBox_Hotels.Text = "";
+            comboBox_Hotels.Enabled = false;
+            availeble_Rooms_gridView.Enabled = false;
+            availeble_Rooms_gridView.DataSource = null;
+        }
+
+        private void B_Hotels_Click(object sender, EventArgs e)
+        {
+            comboBox_Country.Enabled = true;
+            //TO DO: ADD  ELEMENTS FROM COUNTRY TABLE IN A COMBOBOX
+        }
     }
 }
