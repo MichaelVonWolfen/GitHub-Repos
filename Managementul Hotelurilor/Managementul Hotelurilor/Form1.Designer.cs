@@ -64,6 +64,7 @@
             // comboBox_Country
             // 
             this.comboBox_Country.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Country.Enabled = false;
             this.comboBox_Country.FormattingEnabled = true;
             this.comboBox_Country.Location = new System.Drawing.Point(15, 38);
             this.comboBox_Country.Name = "comboBox_Country";
@@ -137,6 +138,7 @@
             this.comboBox_Hotels.Name = "comboBox_Hotels";
             this.comboBox_Hotels.Size = new System.Drawing.Size(121, 21);
             this.comboBox_Hotels.TabIndex = 9;
+            this.comboBox_Hotels.SelectedIndexChanged += new System.EventHandler(this.ComboBox_Hotels_SelectedIndexChanged);
             // 
             // button_Reservation
             // 

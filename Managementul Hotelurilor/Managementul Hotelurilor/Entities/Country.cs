@@ -9,12 +9,16 @@ namespace Managementul_Hotelurilor.Entities
 {
     class Country
     {
-        public int Country_id { get; }
-        public string Country_Name { get; }
+        public int Country_id { get; set; }
+        public string Country_Name { get; set; }
         public Country(int Country_id, string Country_Name)
         {
             this.Country_id = Country_id;
             this.Country_Name = Country_Name;
+        }
+        public Country()
+        {
+
         }
         public Country(OracleDataReader reader)
         {

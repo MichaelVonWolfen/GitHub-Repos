@@ -14,7 +14,7 @@ namespace Managementul_Hotelurilor.DAL
         {
             get
             {
-                string connStr = ConfigurationManager.ConnectionStrings["String"].ConnectionString;
+                string connStr = ConfigurationManager.ConnectionStrings["StoicaMihai"].ConnectionString;
                 OracleConnectionStringBuilder sb = new OracleConnectionStringBuilder(connStr);
                 return sb.ToString();
             }
