@@ -40,5 +40,27 @@ namespace Managementul_Hotelurilor.DAL
                 }
             }
         }
+        public static DataTable GetOcupiedRooms()
+        {
+            using (OracleConnection conn = DatabaseConection.GetOracleConnection())
+            {
+                using (OracleDataAdapter OA = new OracleDataAdapter("SelectAllRoomsOcupied", conn))
+                {
+                    OA.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    OracleParameter OP = new OracleParameter();
+                    OP.ParameterName = "S";
+                    OP.OracleDbType = OracleDbType.RefCursor;
+                    OP.Direction = System.Data.ParameterDirection.Output;
+
+                    OA.SelectCommand.Parameters.Add(OP);
+
+                    DataTable Filed_Rooms = new DataTable();
+                    OA.Fill(Filed_Rooms);
+
+                    return Filed_Rooms;
+                }
+            }
+        }
     }
 }

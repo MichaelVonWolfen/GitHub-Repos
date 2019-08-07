@@ -39,21 +39,31 @@
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox_Hotels = new System.Windows.Forms.ComboBox();
             this.button_Reservation = new System.Windows.Forms.Button();
+            this.tb_RoomName = new System.Windows.Forms.TextBox();
+            this.tb_RoomType = new System.Windows.Forms.TextBox();
+            this.tB_HotelName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.availeble_Rooms_gridView)).BeginInit();
             this.SuspendLayout();
             // 
             // availeble_Rooms_gridView
             // 
+            this.availeble_Rooms_gridView.AllowUserToAddRows = false;
+            this.availeble_Rooms_gridView.AllowUserToDeleteRows = false;
             this.availeble_Rooms_gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.availeble_Rooms_gridView.Enabled = false;
             this.availeble_Rooms_gridView.Location = new System.Drawing.Point(12, 244);
             this.availeble_Rooms_gridView.Name = "availeble_Rooms_gridView";
-            this.availeble_Rooms_gridView.Size = new System.Drawing.Size(776, 194);
+            this.availeble_Rooms_gridView.ReadOnly = true;
+            this.availeble_Rooms_gridView.Size = new System.Drawing.Size(561, 338);
             this.availeble_Rooms_gridView.TabIndex = 0;
+            this.availeble_Rooms_gridView.SelectionChanged += new System.EventHandler(this.Availeble_Rooms_gridView_SelectionChanged);
             // 
             // b_Reset
             // 
-            this.b_Reset.Location = new System.Drawing.Point(645, 38);
+            this.b_Reset.Location = new System.Drawing.Point(439, 8);
             this.b_Reset.Name = "b_Reset";
             this.b_Reset.Size = new System.Drawing.Size(134, 21);
             this.b_Reset.TabIndex = 1;
@@ -74,7 +84,7 @@
             // 
             // b_Hotels
             // 
-            this.b_Hotels.Location = new System.Drawing.Point(645, 92);
+            this.b_Hotels.Location = new System.Drawing.Point(439, 62);
             this.b_Hotels.Name = "b_Hotels";
             this.b_Hotels.Size = new System.Drawing.Size(134, 21);
             this.b_Hotels.TabIndex = 3;
@@ -84,12 +94,13 @@
             // 
             // b_Rooms
             // 
-            this.b_Rooms.Location = new System.Drawing.Point(645, 146);
+            this.b_Rooms.Location = new System.Drawing.Point(439, 116);
             this.b_Rooms.Name = "b_Rooms";
             this.b_Rooms.Size = new System.Drawing.Size(134, 21);
             this.b_Rooms.TabIndex = 4;
             this.b_Rooms.Text = "Rooms";
             this.b_Rooms.UseVisualStyleBackColor = true;
+            this.b_Rooms.Click += new System.EventHandler(this.B_Rooms_Click);
             // 
             // comboBox_city
             // 
@@ -142,18 +153,77 @@
             // 
             // button_Reservation
             // 
-            this.button_Reservation.Location = new System.Drawing.Point(645, 200);
+            this.button_Reservation.Enabled = false;
+            this.button_Reservation.Location = new System.Drawing.Point(439, 170);
             this.button_Reservation.Name = "button_Reservation";
             this.button_Reservation.Size = new System.Drawing.Size(134, 21);
             this.button_Reservation.TabIndex = 10;
             this.button_Reservation.Text = "Reservation";
             this.button_Reservation.UseVisualStyleBackColor = true;
+            this.button_Reservation.Click += new System.EventHandler(this.Button_Reservation_Click);
+            // 
+            // tb_RoomName
+            // 
+            this.tb_RoomName.Enabled = false;
+            this.tb_RoomName.Location = new System.Drawing.Point(203, 38);
+            this.tb_RoomName.Name = "tb_RoomName";
+            this.tb_RoomName.Size = new System.Drawing.Size(155, 20);
+            this.tb_RoomName.TabIndex = 11;
+            // 
+            // tb_RoomType
+            // 
+            this.tb_RoomType.Enabled = false;
+            this.tb_RoomType.Location = new System.Drawing.Point(203, 104);
+            this.tb_RoomType.Name = "tb_RoomType";
+            this.tb_RoomType.Size = new System.Drawing.Size(155, 20);
+            this.tb_RoomType.TabIndex = 12;
+            // 
+            // tB_HotelName
+            // 
+            this.tB_HotelName.Enabled = false;
+            this.tB_HotelName.Location = new System.Drawing.Point(203, 170);
+            this.tB_HotelName.Name = "tB_HotelName";
+            this.tB_HotelName.Size = new System.Drawing.Size(155, 20);
+            this.tB_HotelName.TabIndex = 13;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(203, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Room Name";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(203, 88);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Family Type";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(203, 154);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(63, 13);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Hotel Name";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(593, 594);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tB_HotelName);
+            this.Controls.Add(this.tb_RoomType);
+            this.Controls.Add(this.tb_RoomName);
             this.Controls.Add(this.button_Reservation);
             this.Controls.Add(this.comboBox_Hotels);
             this.Controls.Add(this.label3);
@@ -165,6 +235,8 @@
             this.Controls.Add(this.comboBox_Country);
             this.Controls.Add(this.b_Reset);
             this.Controls.Add(this.availeble_Rooms_gridView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Managementul Hotelurilor";
@@ -187,6 +259,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox_Hotels;
         private System.Windows.Forms.Button button_Reservation;
+        private System.Windows.Forms.TextBox tb_RoomName;
+        private System.Windows.Forms.TextBox tb_RoomType;
+        private System.Windows.Forms.TextBox tB_HotelName;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
 
