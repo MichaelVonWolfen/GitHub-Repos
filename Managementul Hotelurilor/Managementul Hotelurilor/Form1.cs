@@ -198,6 +198,22 @@ namespace Managementul_Hotelurilor
                     ReserveRoom.Status = row.Cells["Status"].Value.ToString();
                     ReserveRoom.Room_ID = Int32.Parse(row.Cells["RoomID"].Value.ToString());
 
+                    FormCollection fc = Application.OpenForms;
+
+                    //TO DO: Actualizarea datelor din formul de realizare de rezervari fara a deshide din nou acel form + LOG mesages
+
+                    foreach (Form frm in fc)
+                    {
+                        if (frm.Name == "ReserveRoom")
+                        {
+                            frm.Close();
+
+                            ReserveRoom RR = new ReserveRoom();
+                            RR.Show();
+
+                            break;
+                        }
+                    }
                     break;
                 }
             }

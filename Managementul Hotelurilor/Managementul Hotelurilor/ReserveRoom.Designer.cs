@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tb_RoomType = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tb_FamilyOriented = new System.Windows.Forms.TextBox();
+            this.tb_RoomID = new System.Windows.Forms.TextBox();
+            this.tb_Hotel = new System.Windows.Forms.TextBox();
             this.dateComming_picker = new System.Windows.Forms.DateTimePicker();
             this.dateLeaving_picker = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,13 +43,13 @@
             this.b_CommitReservation = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // tb_RoomType
             // 
-            this.textBox1.Location = new System.Drawing.Point(29, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(114, 20);
-            this.textBox1.TabIndex = 0;
+            this.tb_RoomType.Location = new System.Drawing.Point(29, 28);
+            this.tb_RoomType.Name = "tb_RoomType";
+            this.tb_RoomType.ReadOnly = true;
+            this.tb_RoomType.Size = new System.Drawing.Size(114, 20);
+            this.tb_RoomType.TabIndex = 0;
             // 
             // label1
             // 
@@ -87,29 +87,29 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Hotel";
             // 
-            // textBox2
+            // tb_FamilyOriented
             // 
-            this.textBox2.Location = new System.Drawing.Point(165, 28);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(114, 20);
-            this.textBox2.TabIndex = 6;
+            this.tb_FamilyOriented.Location = new System.Drawing.Point(165, 28);
+            this.tb_FamilyOriented.Name = "tb_FamilyOriented";
+            this.tb_FamilyOriented.ReadOnly = true;
+            this.tb_FamilyOriented.Size = new System.Drawing.Size(114, 20);
+            this.tb_FamilyOriented.TabIndex = 6;
             // 
-            // textBox3
+            // tb_RoomID
             // 
-            this.textBox3.Location = new System.Drawing.Point(29, 91);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(114, 20);
-            this.textBox3.TabIndex = 7;
+            this.tb_RoomID.Location = new System.Drawing.Point(29, 91);
+            this.tb_RoomID.Name = "tb_RoomID";
+            this.tb_RoomID.ReadOnly = true;
+            this.tb_RoomID.Size = new System.Drawing.Size(114, 20);
+            this.tb_RoomID.TabIndex = 7;
             // 
-            // textBox4
+            // tb_Hotel
             // 
-            this.textBox4.Location = new System.Drawing.Point(165, 91);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(114, 20);
-            this.textBox4.TabIndex = 8;
+            this.tb_Hotel.Location = new System.Drawing.Point(165, 91);
+            this.tb_Hotel.Name = "tb_Hotel";
+            this.tb_Hotel.ReadOnly = true;
+            this.tb_Hotel.Size = new System.Drawing.Size(114, 20);
+            this.tb_Hotel.TabIndex = 8;
             // 
             // dateComming_picker
             // 
@@ -165,19 +165,20 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dateLeaving_picker);
             this.Controls.Add(this.dateComming_picker);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.tb_Hotel);
+            this.Controls.Add(this.tb_RoomID);
+            this.Controls.Add(this.tb_FamilyOriented);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tb_RoomType);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ReserveRoom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reserve Room";
+            this.Load += new System.EventHandler(this.ReserveRoom_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,14 +186,14 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_RoomType;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tb_FamilyOriented;
+        private System.Windows.Forms.TextBox tb_RoomID;
+        private System.Windows.Forms.TextBox tb_Hotel;
         private System.Windows.Forms.DateTimePicker dateComming_picker;
         private System.Windows.Forms.DateTimePicker dateLeaving_picker;
         private System.Windows.Forms.Label label5;

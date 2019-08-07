@@ -54,6 +54,7 @@
     <Compile Include="DAL\DAL_Hotels.cs" />
     <Compile Include="DAL\Dal_HotelServices.cs" />
     <Compile Include="DAL\Dal_Locations.cs" />
+    <Compile Include="DAL\Dal_Rent_Rooms.cs" />
     <Compile Include="DAL\Dal_Rooms.cs" />
     <Compile Include="DAL\DatabaseConection.cs" />
     <Compile Include="DAL\GlobalDictionary.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Entities\Hotels.cs" />
     <Compile Include="Entities\Hotel_Services.cs" />
     <Compile Include="Entities\Locations.cs" />
+    <Compile Include="Entities\Rent_Rooms.cs" />
     <Compile Include="Entities\Rooms.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

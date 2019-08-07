@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +13,6 @@ namespace Managementul_Hotelurilor
 {
     public partial class ReserveRoom : Form
     {
-        private Entities.Rooms RoomReserve;
-        private DataTable All_Rooms;
         public ReserveRoom()
         {
             InitializeComponent();
@@ -51,6 +50,15 @@ namespace Managementul_Hotelurilor
             {
                 case DialogResult.Yes:
                     {
+                        try
+                        {
+                            Entities.Rent_Rooms rent = new Entities.Rent_Rooms(dateComming_picker.Value, dateLeaving_picker.Value, Int32.Parse(tb_RoomID.Text));
+                            DAL.Dal_Rent_Rooms.InsertRenter(rent);
+                        }
+                        catch(OracleException OE)
+                        {
+                            MessageBox.Show(OE.Message);
+                        }
                         //Yes Processing
                         break;
                     }
@@ -61,6 +69,24 @@ namespace Managementul_Hotelurilor
                     }
             }
 
+        }
+        /// <summary>
+        /// Updates all the textboxes from the Reservation Form with the current values of the curent selected row in Form1's gridview
+        /// </summary>
+        public void AllTextboxReservation_Update()
+        {
+            var Room = Form1.ReserveRoom;
+
+            tb_Hotel.Text = Room.Hotel_ID.ToString();
+            tb_RoomID.Text = Room.Room_ID.ToString();
+            tb_RoomType.Text = Room.Room_Name;
+            tb_FamilyOriented.Text = Room.FamilyType;
+
+        }
+
+        private void ReserveRoom_Load(object sender, EventArgs e)
+        {
+            AllTextboxReservation_Update();
         }
     }
 }
