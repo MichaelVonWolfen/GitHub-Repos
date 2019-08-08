@@ -41,6 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.b_CommitReservation = new System.Windows.Forms.Button();
+            this.Error_LABEL = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tb_RoomType
@@ -113,7 +114,7 @@
             // 
             // dateComming_picker
             // 
-            this.dateComming_picker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateComming_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateComming_picker.Location = new System.Drawing.Point(29, 226);
             this.dateComming_picker.Name = "dateComming_picker";
             this.dateComming_picker.Size = new System.Drawing.Size(114, 20);
@@ -121,7 +122,7 @@
             // 
             // dateLeaving_picker
             // 
-            this.dateLeaving_picker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateLeaving_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateLeaving_picker.Location = new System.Drawing.Point(165, 226);
             this.dateLeaving_picker.Name = "dateLeaving_picker";
             this.dateLeaving_picker.Size = new System.Drawing.Size(114, 20);
@@ -155,11 +156,22 @@
             this.b_CommitReservation.UseVisualStyleBackColor = true;
             this.b_CommitReservation.Click += new System.EventHandler(this.B_CommitReservation_Click);
             // 
+            // Error_LABEL
+            // 
+            this.Error_LABEL.AutoSize = true;
+            this.Error_LABEL.ForeColor = System.Drawing.Color.Red;
+            this.Error_LABEL.Location = new System.Drawing.Point(26, 147);
+            this.Error_LABEL.Name = "Error_LABEL";
+            this.Error_LABEL.Size = new System.Drawing.Size(35, 13);
+            this.Error_LABEL.TabIndex = 14;
+            this.Error_LABEL.Text = "label7";
+            // 
             // ReserveRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(314, 342);
+            this.Controls.Add(this.Error_LABEL);
             this.Controls.Add(this.b_CommitReservation);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -199,5 +211,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button b_CommitReservation;
+        private System.Windows.Forms.Label Error_LABEL;
     }
 }

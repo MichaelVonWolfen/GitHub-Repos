@@ -22,7 +22,18 @@ namespace Managementul_Hotelurilor
         {
             DateTime timeComming = dateComming_picker.Value;
             DateTime timeLeaving = dateLeaving_picker.Value;
-
+            //if time coming> timeleaving => Error (you can't leave before you come
+            if(tb_FamilyOriented.Text == "" || tb_Hotel.Text == "" || tb_RoomID.Text == "" || tb_RoomType.Text == "")
+            {
+                MessageBox.Show("ERROR!\nNo Room selected.");
+                Close();
+            }
+            if(timeLeaving.CompareTo(timeComming) < 0)
+            {
+                Error_LABEL.Text = "Error:\n" + timeComming.ToString("dd MMM yyyy") + " greater than " + timeLeaving.Date.ToString("dd MMM yyyy") +
+                                                "\nDate leaving must be grater than comming date.";
+                return;
+            }
             switch (Form1.ReserveRoom.Status.ToUpper())
             {
                 case "O":
@@ -54,6 +65,8 @@ namespace Managementul_Hotelurilor
                         {
                             Entities.Rent_Rooms rent = new Entities.Rent_Rooms(dateComming_picker.Value, dateLeaving_picker.Value, Int32.Parse(tb_RoomID.Text));
                             DAL.Dal_Rent_Rooms.InsertRenter(rent);
+                            MessageBox.Show("Room succesfully Rented in period " + dateComming_picker.Value.ToString() + "-" + dateLeaving_picker.Value.ToString());
+                            this.Close(); 
                         }
                         catch(OracleException OE)
                         {
@@ -87,6 +100,9 @@ namespace Managementul_Hotelurilor
         private void ReserveRoom_Load(object sender, EventArgs e)
         {
             AllTextboxReservation_Update();
+            Error_LABEL.Text = "";
+            dateComming_picker.CustomFormat = "dd MMM yyyy";
+            dateLeaving_picker.CustomFormat = "dd MMM yyyy";
         }
     }
 }
