@@ -40,11 +40,11 @@ namespace Managementul_Hotelurilor.DAL
                 }
             }
         }
-        public static DataTable GetOcupiedRooms()
+        public static DataTable GetOcupiedRooms(string StoreProcedureName)
         {
             using (OracleConnection conn = DatabaseConection.GetOracleConnection())
             {
-                using (OracleDataAdapter OA = new OracleDataAdapter("SelectAllRoomsOcupied", conn))
+                using (OracleDataAdapter OA = new OracleDataAdapter(StoreProcedureName, conn))
                 {
                     OA.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure;
 

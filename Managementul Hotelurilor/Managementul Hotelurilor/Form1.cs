@@ -146,7 +146,7 @@ namespace Managementul_Hotelurilor
                 DataTable dataTable = DAL.Dal_Rooms.GetRooms(ID);
                 availeble_Rooms_gridView.DataSource = dataTable;
                //availeble_Rooms_gridView.Columns["RoomID"].Visible = false;
-                availeble_Rooms_gridView.Columns["Status"].Visible = false;
+                //availeble_Rooms_gridView.Columns["Status"].Visible = false;
                 availeble_Rooms_gridView.Columns["Hotel ID"].Visible = false;
 
                 //Se vor da mai departe in alt form camerele cand se decide sa se realizeze rezervarea
@@ -165,8 +165,8 @@ namespace Managementul_Hotelurilor
 
         private void B_Rooms_Click(object sender, EventArgs e)
         {
-            Form_Reservations form_Reservations = new Form_Reservations();
-
+            Form_Reservations form_Reservations = new Form_Reservations("SelectAllRoomsOcupied");
+            form_Reservations.Text = "Ocupied Rooms from all Hotels";
             FormCollection fc = Application.OpenForms;
 
             foreach (Form frm in fc)
@@ -180,6 +180,25 @@ namespace Managementul_Hotelurilor
 
             form_Reservations.Show();
             
+        }
+        private void B_UnocupiedRooms_Click(object sender, EventArgs e)
+        {
+
+            Form_Reservations form_Reservations = new Form_Reservations("SelectAllRoomsNOTOcupied");
+            form_Reservations.Text = "Unocupied Rooms from all Hotels";
+
+            FormCollection fc = Application.OpenForms;
+
+            foreach (Form frm in fc)
+            {
+                if (frm.Name == "Form_Reservations")
+                {
+                    frm.Close();
+                    break;
+                }
+            }
+
+            form_Reservations.Show();
         }
 
 
@@ -252,5 +271,7 @@ namespace Managementul_Hotelurilor
         private void Form1_Load(object sender, EventArgs e)
         {
         }
+
+        
     }
 }

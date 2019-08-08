@@ -45,6 +45,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.b_UnocupiedRooms = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.availeble_Rooms_gridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,7 +88,7 @@
             // 
             // b_Hotels
             // 
-            this.b_Hotels.Location = new System.Drawing.Point(669, 68);
+            this.b_Hotels.Location = new System.Drawing.Point(669, 54);
             this.b_Hotels.Name = "b_Hotels";
             this.b_Hotels.Size = new System.Drawing.Size(134, 21);
             this.b_Hotels.TabIndex = 3;
@@ -97,11 +98,11 @@
             // 
             // b_Rooms
             // 
-            this.b_Rooms.Location = new System.Drawing.Point(669, 122);
+            this.b_Rooms.Location = new System.Drawing.Point(669, 94);
             this.b_Rooms.Name = "b_Rooms";
             this.b_Rooms.Size = new System.Drawing.Size(134, 21);
             this.b_Rooms.TabIndex = 4;
-            this.b_Rooms.Text = "Rooms";
+            this.b_Rooms.Text = "Ocupied Rooms";
             this.b_Rooms.UseVisualStyleBackColor = true;
             this.b_Rooms.Click += new System.EventHandler(this.B_Rooms_Click);
             // 
@@ -157,7 +158,7 @@
             // button_Reservation
             // 
             this.button_Reservation.Enabled = false;
-            this.button_Reservation.Location = new System.Drawing.Point(669, 176);
+            this.button_Reservation.Location = new System.Drawing.Point(669, 174);
             this.button_Reservation.Name = "button_Reservation";
             this.button_Reservation.Size = new System.Drawing.Size(134, 21);
             this.button_Reservation.TabIndex = 10;
@@ -216,11 +217,22 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "Hotel Name";
             // 
+            // b_UnocupiedRooms
+            // 
+            this.b_UnocupiedRooms.Location = new System.Drawing.Point(669, 134);
+            this.b_UnocupiedRooms.Name = "b_UnocupiedRooms";
+            this.b_UnocupiedRooms.Size = new System.Drawing.Size(134, 21);
+            this.b_UnocupiedRooms.TabIndex = 17;
+            this.b_UnocupiedRooms.Text = "Unocupied Rooms";
+            this.b_UnocupiedRooms.UseVisualStyleBackColor = true;
+            this.b_UnocupiedRooms.Click += new System.EventHandler(this.B_UnocupiedRooms_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 594);
+            this.Controls.Add(this.b_UnocupiedRooms);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -269,6 +281,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button b_UnocupiedRooms;
     }
 }
 
