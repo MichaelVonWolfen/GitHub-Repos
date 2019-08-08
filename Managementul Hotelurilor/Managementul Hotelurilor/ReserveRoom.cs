@@ -70,7 +70,9 @@ namespace Managementul_Hotelurilor
                         }
                         catch(OracleException OE)
                         {
-                            MessageBox.Show(OE.Message);
+
+                            DAL.Log.LogMessage(OE);
+                            MessageBox.Show("Error occured!");
                         }
                         //Yes Processing
                         break;

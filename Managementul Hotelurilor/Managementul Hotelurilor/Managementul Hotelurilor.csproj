@@ -58,6 +58,7 @@
     <Compile Include="DAL\Dal_Rooms.cs" />
     <Compile Include="DAL\DatabaseConection.cs" />
     <Compile Include="DAL\GlobalDictionary.cs" />
+    <Compile Include="DAL\Log.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Hotels.cs" />
     <Compile Include="Entities\Hotel_Services.cs" />

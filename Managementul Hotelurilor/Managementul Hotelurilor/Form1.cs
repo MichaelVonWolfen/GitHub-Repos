@@ -79,7 +79,8 @@ namespace Managementul_Hotelurilor
             }
             catch (OracleException OEx)
             {
-                MessageBox.Show(OEx.Message);
+                DAL.Log.LogMessage(OEx);
+                MessageBox.Show("Errorr occured!");
             }
     //TO DO: Punere Hoteluri dintr-un oras intr-un combobox pentru hoteluri
 }
@@ -102,7 +103,9 @@ namespace Managementul_Hotelurilor
             }
             catch (OracleException OEx)
             {
-                MessageBox.Show(OEx.Message);
+
+                DAL.Log.LogMessage(OEx);
+                MessageBox.Show("Error occured!");
             }
             //TO DO: ADD Elements from Location in a Combobox for location
         }
@@ -126,7 +129,8 @@ namespace Managementul_Hotelurilor
             }
             catch (OracleException OEx)
             {
-                MessageBox.Show(OEx.Message);
+                DAL.Log.LogMessage(OEx);
+                MessageBox.Show("Error occured!");
             }
     //SOLVED: ADD  ELEMENTS FROM COUNTRY TABLE IN A COMBOBOX
 }
@@ -147,11 +151,15 @@ namespace Managementul_Hotelurilor
 
                 //Se vor da mai departe in alt form camerele cand se decide sa se realizeze rezervarea
                 AllRooms = dataTable;
+                availeble_Rooms_gridView.Focus();
+
 
             }
-            catch(OracleException OEx)
+            catch (OracleException OEx)
             {
-                MessageBox.Show(OEx.Message);
+
+                DAL.Log.LogMessage(OEx);
+                MessageBox.Show("Error occured!");
             }
         }
 
@@ -239,7 +247,10 @@ namespace Managementul_Hotelurilor
 
         private void Availeble_Rooms_gridView_MouseEnter(object sender, EventArgs e)
         {
-            availeble_Rooms_gridView.Focus();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
         }
     }
 }
