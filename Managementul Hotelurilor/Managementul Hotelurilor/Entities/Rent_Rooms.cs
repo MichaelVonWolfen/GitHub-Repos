@@ -22,7 +22,6 @@ namespace Managementul_Hotelurilor.Entities
         public Rent_Rooms(DateTime START_DATE, DateTime END_DATE, int ROOM_ID)
         {
             this.END_DATE = END_DATE;
-            Rent_RoomsID = 0;
             this.START_DATE = START_DATE;
             this.ROOM_ID = ROOM_ID;
         }

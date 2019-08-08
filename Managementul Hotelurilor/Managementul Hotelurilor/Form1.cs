@@ -141,7 +141,7 @@ namespace Managementul_Hotelurilor
             {
                 DataTable dataTable = DAL.Dal_Rooms.GetRooms(ID);
                 availeble_Rooms_gridView.DataSource = dataTable;
-                availeble_Rooms_gridView.Columns["RoomID"].Visible = false;
+               //availeble_Rooms_gridView.Columns["RoomID"].Visible = false;
                 availeble_Rooms_gridView.Columns["Status"].Visible = false;
                 availeble_Rooms_gridView.Columns["Hotel ID"].Visible = false;
 
@@ -177,7 +177,7 @@ namespace Managementul_Hotelurilor
 
         private void Availeble_Rooms_gridView_SelectionChanged(object sender, EventArgs e)
         {
-
+            //Enable Texboxes and reservsation button
             tb_RoomName.Enabled = true;
             tB_HotelName.Enabled = true;
             tb_RoomType.Enabled = true;
@@ -188,6 +188,7 @@ namespace Managementul_Hotelurilor
             {
                 if (row.Selected)
                 {
+                    //fills the texboxes and a reserve room variabl ewith th acontents of current selected room
                     tb_RoomName.Text = row.Cells[0].Value.ToString();
                     tb_RoomType.Text = row.Cells[1].Value.ToString();
                     tB_HotelName.Text = row.Cells[2].Value.ToString();
