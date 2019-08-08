@@ -36,11 +36,12 @@
             // 
             this.GV_OcupiedRooms.AllowUserToAddRows = false;
             this.GV_OcupiedRooms.AllowUserToDeleteRows = false;
+            this.GV_OcupiedRooms.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.GV_OcupiedRooms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GV_OcupiedRooms.Location = new System.Drawing.Point(12, 12);
             this.GV_OcupiedRooms.Name = "GV_OcupiedRooms";
             this.GV_OcupiedRooms.ReadOnly = true;
-            this.GV_OcupiedRooms.Size = new System.Drawing.Size(577, 735);
+            this.GV_OcupiedRooms.Size = new System.Drawing.Size(866, 735);
             this.GV_OcupiedRooms.TabIndex = 0;
             this.GV_OcupiedRooms.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
             // 
@@ -48,7 +49,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 759);
+            this.ClientSize = new System.Drawing.Size(890, 759);
             this.Controls.Add(this.GV_OcupiedRooms);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

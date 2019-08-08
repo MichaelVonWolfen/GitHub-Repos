@@ -236,5 +236,10 @@ namespace Managementul_Hotelurilor
             }
             rooms.Show();
         }
+
+        private void Availeble_Rooms_gridView_MouseEnter(object sender, EventArgs e)
+        {
+            availeble_Rooms_gridView.Focus();
+        }
     }
 }
