@@ -31,17 +31,24 @@ namespace Managementul_Hotelurilor.DAL
                     OP2.ParameterName = "dateS";
                     OP2.OracleDbType = OracleDbType.Date;
                     OP2.Direction = System.Data.ParameterDirection.Input;
-                    OP2.Value = Convert.ToDateTime(renter.START_DATE);
+                    OP2.Value = renter.START_DATE;
 
                     OracleParameter OP3 = new OracleParameter();
                     OP3.ParameterName = "dateE";
                     OP3.OracleDbType = OracleDbType.Date;
                     OP3.Direction = System.Data.ParameterDirection.Input;
-                    OP3.Value = Convert.ToDateTime(renter.END_DATE);
+                    OP3.Value = renter.END_DATE;
+
+                    OracleParameter OP4 = new OracleParameter();
+                    OP4.ParameterName = "ReservID";
+                    OP4.OracleDbType = OracleDbType.Varchar2;
+                    OP4.Direction = System.Data.ParameterDirection.Input;
+                    OP4.Value = renter.ReservationID;
 
                     OA.Parameters.Add(OP2);
                     OA.Parameters.Add(OP3);
                     OA.Parameters.Add(OP1);
+                    OA.Parameters.Add(OP4);
 
 
                     OA.ExecuteNonQuery();

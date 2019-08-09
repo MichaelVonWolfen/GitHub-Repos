@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReserveRoom));
             this.tb_RoomType = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,11 +43,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.b_CommitReservation = new System.Windows.Forms.Button();
             this.Error_LABEL = new System.Windows.Forms.Label();
+            this.richTextBox_ConfirmReservation = new System.Windows.Forms.RichTextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tb_UniqueClientID = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // tb_RoomType
             // 
-            this.tb_RoomType.Location = new System.Drawing.Point(29, 28);
+            this.tb_RoomType.Location = new System.Drawing.Point(12, 31);
             this.tb_RoomType.Name = "tb_RoomType";
             this.tb_RoomType.ReadOnly = true;
             this.tb_RoomType.Size = new System.Drawing.Size(114, 20);
@@ -55,7 +59,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 12);
+            this.label1.Location = new System.Drawing.Point(38, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 1;
@@ -64,7 +68,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(183, 12);
+            this.label2.Location = new System.Drawing.Point(196, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 13);
             this.label2.TabIndex = 2;
@@ -73,7 +77,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(62, 75);
+            this.label3.Location = new System.Drawing.Point(45, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 3;
@@ -82,7 +86,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(206, 75);
+            this.label4.Location = new System.Drawing.Point(219, 75);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 4;
@@ -90,7 +94,7 @@
             // 
             // tb_FamilyOriented
             // 
-            this.tb_FamilyOriented.Location = new System.Drawing.Point(165, 28);
+            this.tb_FamilyOriented.Location = new System.Drawing.Point(178, 28);
             this.tb_FamilyOriented.Name = "tb_FamilyOriented";
             this.tb_FamilyOriented.ReadOnly = true;
             this.tb_FamilyOriented.Size = new System.Drawing.Size(114, 20);
@@ -98,7 +102,7 @@
             // 
             // tb_RoomID
             // 
-            this.tb_RoomID.Location = new System.Drawing.Point(29, 91);
+            this.tb_RoomID.Location = new System.Drawing.Point(12, 94);
             this.tb_RoomID.Name = "tb_RoomID";
             this.tb_RoomID.ReadOnly = true;
             this.tb_RoomID.Size = new System.Drawing.Size(114, 20);
@@ -106,7 +110,7 @@
             // 
             // tb_Hotel
             // 
-            this.tb_Hotel.Location = new System.Drawing.Point(165, 91);
+            this.tb_Hotel.Location = new System.Drawing.Point(178, 91);
             this.tb_Hotel.Name = "tb_Hotel";
             this.tb_Hotel.ReadOnly = true;
             this.tb_Hotel.Size = new System.Drawing.Size(114, 20);
@@ -115,7 +119,7 @@
             // dateComming_picker
             // 
             this.dateComming_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateComming_picker.Location = new System.Drawing.Point(29, 226);
+            this.dateComming_picker.Location = new System.Drawing.Point(344, 28);
             this.dateComming_picker.Name = "dateComming_picker";
             this.dateComming_picker.Size = new System.Drawing.Size(114, 20);
             this.dateComming_picker.TabIndex = 9;
@@ -123,7 +127,7 @@
             // dateLeaving_picker
             // 
             this.dateLeaving_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateLeaving_picker.Location = new System.Drawing.Point(165, 226);
+            this.dateLeaving_picker.Location = new System.Drawing.Point(344, 91);
             this.dateLeaving_picker.Name = "dateLeaving_picker";
             this.dateLeaving_picker.Size = new System.Drawing.Size(114, 20);
             this.dateLeaving_picker.TabIndex = 10;
@@ -131,7 +135,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 194);
+            this.label5.Location = new System.Drawing.Point(347, 12);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 13);
             this.label5.TabIndex = 11;
@@ -140,7 +144,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(165, 193);
+            this.label6.Location = new System.Drawing.Point(345, 75);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(112, 13);
             this.label6.TabIndex = 12;
@@ -148,7 +152,7 @@
             // 
             // b_CommitReservation
             // 
-            this.b_CommitReservation.Location = new System.Drawing.Point(104, 283);
+            this.b_CommitReservation.Location = new System.Drawing.Point(182, 221);
             this.b_CommitReservation.Name = "b_CommitReservation";
             this.b_CommitReservation.Size = new System.Drawing.Size(107, 23);
             this.b_CommitReservation.TabIndex = 13;
@@ -160,17 +164,47 @@
             // 
             this.Error_LABEL.AutoSize = true;
             this.Error_LABEL.ForeColor = System.Drawing.Color.Red;
-            this.Error_LABEL.Location = new System.Drawing.Point(26, 147);
+            this.Error_LABEL.Location = new System.Drawing.Point(26, 167);
             this.Error_LABEL.Name = "Error_LABEL";
             this.Error_LABEL.Size = new System.Drawing.Size(35, 13);
             this.Error_LABEL.TabIndex = 14;
             this.Error_LABEL.Text = "label7";
             // 
+            // richTextBox_ConfirmReservation
+            // 
+            this.richTextBox_ConfirmReservation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.richTextBox_ConfirmReservation.Location = new System.Drawing.Point(6, 250);
+            this.richTextBox_ConfirmReservation.Name = "richTextBox_ConfirmReservation";
+            this.richTextBox_ConfirmReservation.ReadOnly = true;
+            this.richTextBox_ConfirmReservation.Size = new System.Drawing.Size(452, 182);
+            this.richTextBox_ConfirmReservation.TabIndex = 15;
+            this.richTextBox_ConfirmReservation.Text = "";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(208, 118);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Unique ID";
+            // 
+            // tb_UniqueClientID
+            // 
+            this.tb_UniqueClientID.Location = new System.Drawing.Point(126, 144);
+            this.tb_UniqueClientID.Name = "tb_UniqueClientID";
+            this.tb_UniqueClientID.ReadOnly = true;
+            this.tb_UniqueClientID.Size = new System.Drawing.Size(219, 20);
+            this.tb_UniqueClientID.TabIndex = 17;
+            // 
             // ReserveRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 342);
+            this.ClientSize = new System.Drawing.Size(470, 452);
+            this.Controls.Add(this.tb_UniqueClientID);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.richTextBox_ConfirmReservation);
             this.Controls.Add(this.Error_LABEL);
             this.Controls.Add(this.b_CommitReservation);
             this.Controls.Add(this.label6);
@@ -186,6 +220,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tb_RoomType);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "ReserveRoom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -212,5 +247,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button b_CommitReservation;
         private System.Windows.Forms.Label Error_LABEL;
+        private System.Windows.Forms.RichTextBox richTextBox_ConfirmReservation;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tb_UniqueClientID;
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.availeble_Rooms_gridView = new System.Windows.Forms.DataGridView();
             this.b_Reset = new System.Windows.Forms.Button();
             this.comboBox_Country = new System.Windows.Forms.ComboBox();
@@ -251,6 +252,7 @@
             this.Controls.Add(this.b_Reset);
             this.Controls.Add(this.availeble_Rooms_gridView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

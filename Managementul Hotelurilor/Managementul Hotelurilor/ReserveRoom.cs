@@ -26,7 +26,7 @@ namespace Managementul_Hotelurilor
             if(tb_FamilyOriented.Text == "" || tb_Hotel.Text == "" || tb_RoomID.Text == "" || tb_RoomType.Text == "")
             {
                 MessageBox.Show("ERROR!\nNo Room selected.");
-                Close();
+                return;
             }
             if(timeLeaving.CompareTo(timeComming) < 0)
             {
@@ -36,17 +36,17 @@ namespace Managementul_Hotelurilor
             }
             switch (Form1.ReserveRoom.Status.ToUpper())
             {
-                case "O":
+                case "OCUPIED":
                     {
                         MessageBox.Show("Room is Ocupied.\nCan't make a reservation to this room.");
                         break;
                     }
-                case "UCK":
+                case "UNCKOWN":
                     {
                         MessageBox.Show("Room status is uncknown.\nCan't make a reservation to this room.");
                         break;
                     }
-                case "U":
+                case "UNOCUPIED":
                     {
                         MakeReservation();
                         break;
@@ -54,6 +54,15 @@ namespace Managementul_Hotelurilor
             }
             //TO DO:check if room availeble and show a Response
            //TO DO: If room availeble save in a new table
+        }
+        private void AddConfirmationRichTextbox(Entities.Rent_Rooms rented_Room)
+        {
+            richTextBox_ConfirmReservation.Text = "Confirm Reservation!\n" +
+                                                  "User: UNDEFINED TODO :P\n" +
+                                                  "Room ID: " + rented_Room.ROOM_ID + "\n" +
+                                                  "Date Coming: " + rented_Room.START_DATE + "\n" +
+                                                  "DateLeaving: " + rented_Room.END_DATE + "\n" +
+                                                  "Reservation Identifier:" + rented_Room.ReservationID;
         }
         private void MakeReservation()
         {
@@ -63,10 +72,11 @@ namespace Managementul_Hotelurilor
                     {
                         try
                         {
-                            Entities.Rent_Rooms rent = new Entities.Rent_Rooms(dateComming_picker.Value, dateLeaving_picker.Value, Int32.Parse(tb_RoomID.Text));
+                            Entities.Rent_Rooms rent = new Entities.Rent_Rooms(dateComming_picker.Value, dateLeaving_picker.Value, Int32.Parse(tb_RoomID.Text),tb_UniqueClientID.Text);
                             DAL.Dal_Rent_Rooms.InsertRenter(rent);
-                            MessageBox.Show("Room succesfully Rented in period " + dateComming_picker.Value.ToString() + "-" + dateLeaving_picker.Value.ToString());
-                            this.Close(); 
+                            AddConfirmationRichTextbox(rent);
+                            //MessageBox.Show("Room succesfully Rented in period " + dateComming_picker.Value.ToString() + "-" + dateLeaving_picker.Value.ToString());
+                            //this.Close(); 
                         }
                         catch(OracleException OE)
                         {
@@ -74,12 +84,11 @@ namespace Managementul_Hotelurilor
                             DAL.Log.LogMessage(OE);
                             MessageBox.Show("Error occured!");
                         }
-                        //Yes Processing
                         break;
                     }
                 case DialogResult.No:
                     {
-                        //No Processing
+
                         break;
                     }
             }
@@ -96,9 +105,16 @@ namespace Managementul_Hotelurilor
             tb_RoomID.Text = Room.Room_ID.ToString();
             tb_RoomType.Text = Room.Room_Name;
             tb_FamilyOriented.Text = Room.FamilyType;
+            tb_UniqueClientID.Text = GenerateUniqueID();
+
 
         }
-
+        private string GenerateUniqueID()
+        {
+            string UniqueID = DateTime.UtcNow.ToString("HHyyfff-MMddss-ssfff-");
+            Random r = new Random();
+            return UniqueID + r.Next(1000).ToString();
+        }
         private void ReserveRoom_Load(object sender, EventArgs e)
         {
             AllTextboxReservation_Update();
