@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Managementul_Hotelurilor
 {
-    public partial class ReserveRoom : Form
+    public partial class ReserveRoom : MetroFramework.Forms.MetroForm
     {
         public ReserveRoom()
         {

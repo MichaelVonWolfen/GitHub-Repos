@@ -8,10 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Animations;
+using MaterialSkin.Controls;
+using MetroFramework;
 
 namespace Managementul_Hotelurilor
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MetroFramework.Forms.MetroForm
     {
         public static Entities.Rooms ReserveRoom = new Entities.Rooms();
         public static DataTable AllRooms;
@@ -184,21 +188,6 @@ namespace Managementul_Hotelurilor
         private void B_UnocupiedRooms_Click(object sender, EventArgs e)
         {
 
-            Form_Reservations form_Reservations = new Form_Reservations("SelectAllRoomsNOTOcupied");
-            form_Reservations.Text = "Unocupied Rooms from all Hotels";
-
-            FormCollection fc = Application.OpenForms;
-
-            foreach (Form frm in fc)
-            {
-                if (frm.Name == "Form_Reservations")
-                {
-                    frm.Close();
-                    break;
-                }
-            }
-
-            form_Reservations.Show();
         }
 
 
@@ -270,6 +259,8 @@ namespace Managementul_Hotelurilor
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.StyleManager = metroStyleManager_change_to_dark_or_light_mode;
+            metroStyleManager_change_to_dark_or_light_mode.Theme = MetroThemeStyle.Dark;
         }
 
         
