@@ -263,6 +263,9 @@ namespace Managementul_Hotelurilor
             metroStyleManager_change_to_dark_or_light_mode.Theme = MetroThemeStyle.Dark;
         }
 
-        
+        private void Label1_MouseEnter(object sender, EventArgs e)
+        {
+            label1.BackColor = Form1.DefaultBackColor;
+        }
     }
 }
