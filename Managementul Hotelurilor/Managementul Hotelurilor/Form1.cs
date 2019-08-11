@@ -19,12 +19,16 @@ namespace Managementul_Hotelurilor
     {
         public static Entities.Rooms ReserveRoom = new Entities.Rooms();
         public static DataTable AllRooms;
+        private Color color_Light_Mode_blue = Color.FromArgb(45, 100, 148);
+        private Color color_Dark_Mode_Blue = Color.FromArgb(33,67,149);
+        #region Constructor
         public Form1()
         {
             InitializeComponent();
         }
-        
+        #endregion
         // Set of Particular functions specialized on reseting certain components
+        #region Button Rseters
         private void ResetALL_ExeceptCountriesCitiesHotels()
         {
             tb_RoomName.Enabled = false;
@@ -64,6 +68,9 @@ namespace Managementul_Hotelurilor
 
             ResetAll_ExceptCountries();
         }
+        #endregion
+
+        #region Search Hotel Rooms
         private void ComboBox_city_SelectedValueChanged(object sender, EventArgs e)
         {
             ResetAll_ExceptCountriesCities();
@@ -86,8 +93,8 @@ namespace Managementul_Hotelurilor
                 DAL.Log.LogMessage(OEx);
                 MessageBox.Show("Errorr occured!");
             }
-    //TO DO: Punere Hoteluri dintr-un oras intr-un combobox pentru hoteluri
-}
+        //TO DO: Punere Hoteluri dintr-un oras intr-un combobox pentru hoteluri
+        }       
         private void ComboBox_Country_SelectedValueChanged(object sender, EventArgs e)
         {
             ResetAll_ExceptCountries();
@@ -137,8 +144,7 @@ namespace Managementul_Hotelurilor
                 MessageBox.Show("Error occured!");
             }
     //SOLVED: ADD  ELEMENTS FROM COUNTRY TABLE IN A COMBOBOX
-}
-
+        }
         private void ComboBox_Hotels_SelectedIndexChanged(object sender, EventArgs e)
         {
             ResetALL_ExeceptCountriesCitiesHotels();
@@ -166,7 +172,9 @@ namespace Managementul_Hotelurilor
                 MessageBox.Show("Error occured!");
             }
         }
+        #endregion
 
+        #region View Ocupied AND Not Ocupied Rooms
         private void B_Rooms_Click(object sender, EventArgs e)
         {
             Form_Reservations form_Reservations = new Form_Reservations("SelectAllRoomsOcupied");
@@ -187,9 +195,23 @@ namespace Managementul_Hotelurilor
         }
         private void B_UnocupiedRooms_Click(object sender, EventArgs e)
         {
+            Form_Reservations form_Reservations = new Form_Reservations("SelectAllRoomsNOTOcupied");
+            form_Reservations.Text = "Unocupied Rooms from all Hotels";
+            FormCollection fc = Application.OpenForms;
 
+            foreach (Form frm in fc)
+            {
+                if (frm.Name == "Form_Reservations")
+                {
+                    frm.Close();
+                    break;
+                }
+            }
+
+            form_Reservations.Show();
         }
 
+        #endregion
 
         private void Availeble_Rooms_gridView_SelectionChanged(object sender, EventArgs e)
         {
@@ -205,8 +227,8 @@ namespace Managementul_Hotelurilor
                 if (row.Selected)
                 {
                     //fills the texboxes and a reserve room variabl ewith th acontents of current selected room
-                    tb_RoomName.Text = row.Cells[0].Value.ToString();
-                    tb_RoomType.Text = row.Cells[1].Value.ToString();
+                    tb_RoomName.Text = row.Cells["Room Name"].Value.ToString();
+                    tb_RoomType.Text = row.Cells["Family Room"].Value.ToString();
                     tB_HotelName.Text = row.Cells[2].Value.ToString();
 
                     ReserveRoom.Room_Name = row.Cells["Room Name"].Value.ToString();
@@ -259,13 +281,19 @@ namespace Managementul_Hotelurilor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.StyleManager = metroStyleManager_change_to_dark_or_light_mode;
-            metroStyleManager_change_to_dark_or_light_mode.Theme = MetroThemeStyle.Dark;
+        //    this.StyleManager = metroStyleManager_change_to_dark_or_light_mode;
+        //    metroStyleManager_change_to_dark_or_light_mode.Theme = MetroThemeStyle.Dark;
         }
 
-        private void Label1_MouseEnter(object sender, EventArgs e)
+
+
+        private void Form1_Resize(object sender, EventArgs e)
         {
-            label1.BackColor = Form1.DefaultBackColor;
+        }
+
+        private void Availeble_Rooms_gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

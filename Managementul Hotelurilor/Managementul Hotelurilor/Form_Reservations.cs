@@ -13,12 +13,6 @@ namespace Managementul_Hotelurilor
     public partial class Form_Reservations : Form
     {
         private string StoreProcName;
-
-        public Form_Reservations()
-        {
-            InitializeComponent();
-        }
-
         public Form_Reservations(string StoreProcName)
         {
             this.StoreProcName = StoreProcName;
