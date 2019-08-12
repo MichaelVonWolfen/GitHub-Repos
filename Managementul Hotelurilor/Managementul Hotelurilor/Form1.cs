@@ -12,10 +12,11 @@ using MaterialSkin;
 using MaterialSkin.Animations;
 using MaterialSkin.Controls;
 using MetroFramework;
+using System.Threading;
 
 namespace Managementul_Hotelurilor
 {
-    public partial class Form1 : MetroFramework.Forms.MetroForm
+    public partial class Form1 :MetroFramework.Forms.MetroForm
     {
         public static Entities.Rooms ReserveRoom = new Entities.Rooms();
         public static DataTable AllRooms;
@@ -71,30 +72,6 @@ namespace Managementul_Hotelurilor
         #endregion
 
         #region Search Hotel Rooms
-        private void ComboBox_city_SelectedValueChanged(object sender, EventArgs e)
-        {
-            ResetAll_ExceptCountriesCities();
-            comboBox_Hotels.Enabled = true;
-            try
-            {
-                int ID = DAL.Dal_Locations.GetLocationID(comboBox_city.Text, DAL.GlobalDictionary.LocationDictionary);
-
-                DAL.DAL_Hotels hotels = new DAL.DAL_Hotels(ID);
-
-                foreach (string s in hotels.HotelsDictionary.Values)
-                {
-                    comboBox_Hotels.Items.Add(s);
-                }
-                DAL.GlobalDictionary.HotelsDictionary = hotels.HotelsDictionary;
-
-            }
-            catch (OracleException OEx)
-            {
-                DAL.Log.LogMessage(OEx);
-                MessageBox.Show("Errorr occured!");
-            }
-        //TO DO: Punere Hoteluri dintr-un oras intr-un combobox pentru hoteluri
-        }       
         private void ComboBox_Country_SelectedValueChanged(object sender, EventArgs e)
         {
             ResetAll_ExceptCountries();
@@ -148,15 +125,14 @@ namespace Managementul_Hotelurilor
         private void ComboBox_Hotels_SelectedIndexChanged(object sender, EventArgs e)
         {
             ResetALL_ExeceptCountriesCitiesHotels();
-
-            int ID = DAL.DAL_Hotels.GetHotelID(comboBox_Hotels.Text,DAL.GlobalDictionary.HotelsDictionary);
+            int ID = DAL.DAL_Hotels.GetHotelID(comboBox_Hotels.Text, DAL.GlobalDictionary.HotelsDictionary);
             availeble_Rooms_gridView.Enabled = true;
             try
             {
                 DataTable dataTable = DAL.Dal_Rooms.GetRooms(ID);
                 availeble_Rooms_gridView.DataSource = dataTable;
-               //availeble_Rooms_gridView.Columns["RoomID"].Visible = false;
-                //availeble_Rooms_gridView.Columns["Status"].Visible = false;
+                //availeble_Rooms_gridView.Columns["RoomID"].Visible = false;
+                availeble_Rooms_gridView.Columns["Status"].Visible = false;
                 availeble_Rooms_gridView.Columns["Hotel ID"].Visible = false;
 
                 //Se vor da mai departe in alt form camerele cand se decide sa se realizeze rezervarea
@@ -167,7 +143,6 @@ namespace Managementul_Hotelurilor
             }
             catch (OracleException OEx)
             {
-
                 DAL.Log.LogMessage(OEx);
                 MessageBox.Show("Error occured!");
             }
@@ -256,6 +231,7 @@ namespace Managementul_Hotelurilor
                     break;
                 }
             }
+            bunifuVScrollBar1.BindTo(availeble_Rooms_gridView);
         }
 
         private void Button_Reservation_Click(object sender, EventArgs e)
@@ -281,8 +257,8 @@ namespace Managementul_Hotelurilor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-        //    this.StyleManager = metroStyleManager_change_to_dark_or_light_mode;
-        //    metroStyleManager_change_to_dark_or_light_mode.Theme = MetroThemeStyle.Dark;
+            //    this.StyleManager = metroStyleManager_change_to_dark_or_light_mode;
+            //    metroStyleManager_change_to_dark_or_light_mode.Theme = MetroThemeStyle.Dark;
         }
 
 
@@ -294,6 +270,71 @@ namespace Managementul_Hotelurilor
         private void Availeble_Rooms_gridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void BunifuImageButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private bool MenuExpanded = false;
+        private void MouseDetect_Tick(object sender, EventArgs e)
+        {
+            if (!bunifuTransition1.IsCompleted) return;
+            if (panel1.ClientRectangle.Contains(PointToClient(Control.MousePosition)))
+            {
+                if (!MenuExpanded)
+                {
+                    MenuExpanded = true;
+                    //panel1.Visible = false;
+                    panel1.Width = 200;
+                    bunifuTransition1.Show(panel1);
+                }
+            }
+            else
+            {
+                if (MenuExpanded)
+                {
+                    MenuExpanded = false;
+                    //panel1.Visible = false;
+                    panel1.Width = 56;
+                    bunifuTransition1.Show(panel1);
+                }
+            }
+            MouseDetect.Stop();
+        }
+
+        private void Panel1_MouseEnter_Leave(object sender, EventArgs e)
+        {
+            MouseDetect.Start();
+
+        }
+
+        private void Panel1_MouseLeave(object sender, EventArgs e)
+        {
+            MouseDetect.Start();
+        }
+
+        private void ComboBox_city_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ResetAll_ExceptCountriesCities();
+            comboBox_Hotels.Enabled = true;
+            try
+            {
+                int ID = DAL.Dal_Locations.GetLocationID(comboBox_city.Text, DAL.GlobalDictionary.LocationDictionary);
+                DAL.DAL_Hotels hotels = new DAL.DAL_Hotels(ID);
+                foreach (string s in hotels.HotelsDictionary.Values)
+                {
+                    comboBox_Hotels.Items.Add(s);
+                }
+                DAL.GlobalDictionary.HotelsDictionary = hotels.HotelsDictionary;
+            }
+            catch (OracleException OEx)
+            {
+                DAL.Log.LogMessage(OEx);
+                MessageBox.Show("Errorr occured!");
+            }
+            //TO DO: Punere Hoteluri dintr-un oras intr-un combobox pentru hoteluri
+          
         }
     }
 }
