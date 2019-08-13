@@ -132,7 +132,7 @@ namespace Managementul_Hotelurilor
                 DataTable dataTable = DAL.Dal_Rooms.GetRooms(ID);
                 availeble_Rooms_gridView.DataSource = dataTable;
                 //availeble_Rooms_gridView.Columns["RoomID"].Visible = false;
-                availeble_Rooms_gridView.Columns["Status"].Visible = false;
+                availeble_Rooms_gridView.Columns["Status"].Visible = true;
                 availeble_Rooms_gridView.Columns["Hotel ID"].Visible = false;
 
                 //Se vor da mai departe in alt form camerele cand se decide sa se realizeze rezervarea
@@ -202,42 +202,49 @@ namespace Managementul_Hotelurilor
                 if (row.Selected)
                 {
                     //fills the texboxes and a reserve room variabl ewith th acontents of current selected room
-                    tb_RoomName.Text = row.Cells["Room Name"].Value.ToString();
-                    tb_RoomType.Text = row.Cells["Family Room"].Value.ToString();
-                    tB_HotelName.Text = row.Cells[2].Value.ToString();
-
-                    ReserveRoom.Room_Name = row.Cells["Room Name"].Value.ToString();
-                    ReserveRoom.FamilyType = row.Cells["Family Room"].Value.ToString();
-                    ReserveRoom.Hotel_ID = Int32.Parse(row.Cells["Hotel ID"].Value.ToString());
-                    ReserveRoom.Status = row.Cells["Status"].Value.ToString();
-                    ReserveRoom.Room_ID = Int32.Parse(row.Cells["RoomID"].Value.ToString());
-
-                    FormCollection fc = Application.OpenForms;
-
-                    //TO DO: Actualizarea datelor din formul de realizare de rezervari fara a deshide din nou acel form + LOG mesages
-
-                    foreach (Form frm in fc)
+                    try
                     {
-                        if (frm.Name == "ReserveRoom")
+                        tb_RoomName.Text = row.Cells["Room Name"].Value.ToString();
+                        tb_RoomType.Text = row.Cells["Family Room"].Value.ToString();
+                        tB_HotelName.Text = row.Cells[2].Value.ToString();
+
+                        ReserveRoom.Room_Name = row.Cells["Room Name"].Value.ToString();
+                        ReserveRoom.FamilyType = row.Cells["Family Room"].Value.ToString();
+                        ReserveRoom.Hotel_ID = Int32.Parse(row.Cells["Hotel ID"].Value.ToString());
+                        ReserveRoom.Status = row.Cells["Status"].Value.ToString();
+                        ReserveRoom.Room_ID = Int32.Parse(row.Cells["RoomID"].Value.ToString());
+                        ReserveRoom.Price = Int32.Parse(row.Cells["Price"].Value.ToString());
+
+                        FormCollection fc = Application.OpenForms;
+
+                        //TO DO: Actualizarea datelor din formul de realizare de rezervari fara a deshide din nou acel form + LOG mesages
+
+                        foreach (Form frm in fc)
                         {
-                            frm.Close();
+                            if (frm.Name == "ReserveRoom")
+                            {
+                                frm.Close();
 
-                            ReserveRoom RR = new ReserveRoom();
-                            RR.Show();
+                                ReserveRoom RR = new ReserveRoom(comboBox_Country.Text);
+                                RR.Show();
 
-                            break;
+                                break;
+                            }
                         }
+                        break;
                     }
-                    break;
+                    catch(Exception ex)
+                    {
+
+                    }
                 }
             }
-            bunifuVScrollBar1.BindTo(availeble_Rooms_gridView);
         }
 
         private void Button_Reservation_Click(object sender, EventArgs e)
         {
 
-            ReserveRoom rooms = new ReserveRoom();
+            ReserveRoom rooms = new ReserveRoom(comboBox_Country.Text);
             FormCollection fc = Application.OpenForms;
 
             foreach (Form frm in fc)
@@ -279,6 +286,7 @@ namespace Managementul_Hotelurilor
         private bool MenuExpanded = false;
         private void MouseDetect_Tick(object sender, EventArgs e)
         {
+            /*
             if (!bunifuTransition1.IsCompleted) return;
             if (panel1.ClientRectangle.Contains(PointToClient(Control.MousePosition)))
             {
@@ -301,17 +309,18 @@ namespace Managementul_Hotelurilor
                 }
             }
             MouseDetect.Stop();
+            */
         }
 
         private void Panel1_MouseEnter_Leave(object sender, EventArgs e)
         {
-            MouseDetect.Start();
+            //MouseDetect.Start();
 
         }
 
         private void Panel1_MouseLeave(object sender, EventArgs e)
         {
-            MouseDetect.Start();
+            //MouseDetect.Start();
         }
 
         private void ComboBox_city_SelectedValueChanged(object sender, EventArgs e)

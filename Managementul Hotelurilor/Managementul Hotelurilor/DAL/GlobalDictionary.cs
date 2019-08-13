@@ -13,6 +13,13 @@ namespace Managementul_Hotelurilor.DAL
             get; set;
         }
         public static Dictionary<int, string> HotelsDictionary { get; set; }
-        
+
+        public static Dictionary<string, double> Vat = new Dictionary<string, double>
+        {
+            ["Romania"] = 19,
+            ["Italy"] = 22,
+            ["Switzerland"] = 3.7
+        };
+
     }
 }

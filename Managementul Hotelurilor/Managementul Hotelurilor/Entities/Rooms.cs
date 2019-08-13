@@ -14,6 +14,7 @@ namespace Managementul_Hotelurilor.Entities
         public string FamilyType{ get; set; }
         public string Status { get; set; }
         public int Hotel_ID { get; set; }
+        public float Price { get; set; }
         public Rooms()
         {
 

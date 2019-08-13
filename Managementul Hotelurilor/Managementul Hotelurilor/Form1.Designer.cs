@@ -88,7 +88,7 @@
             this.bunifuTransition1.SetDecoration(this.bunifuLabel1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuLabel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuLabel1.ForeColor = System.Drawing.Color.Gray;
-            this.bunifuLabel1.Location = new System.Drawing.Point(206, 11);
+            this.bunifuLabel1.Location = new System.Drawing.Point(277, 15);
             this.bunifuLabel1.Name = "bunifuLabel1";
             this.bunifuLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.bunifuLabel1.Size = new System.Drawing.Size(226, 32);
@@ -107,17 +107,17 @@
             this.panel1.Controls.Add(this.bunifuImageButton3);
             this.panel1.Controls.Add(this.bunifuImageButton2);
             this.panel1.Controls.Add(this.bunifuImageButton1);
+            this.panel1.Controls.Add(this.b_LightDark_theme);
             this.panel1.Controls.Add(this.button_Reservation);
             this.panel1.Controls.Add(this.b_UnocupiedRooms);
             this.panel1.Controls.Add(this.b_RoomsOcupied);
             this.panel1.Controls.Add(this.b_Hotels);
             this.panel1.Controls.Add(this.b_Reset);
             this.panel1.Controls.Add(this.bunifuCustomLabel1);
-            this.panel1.Controls.Add(this.b_LightDark_theme);
             this.bunifuTransition1.SetDecoration(this.panel1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.panel1.Location = new System.Drawing.Point(0, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(56, 749);
+            this.panel1.Size = new System.Drawing.Size(200, 749);
             this.panel1.TabIndex = 39;
             this.panel1.MouseEnter += new System.EventHandler(this.Panel1_MouseEnter_Leave);
             this.panel1.MouseLeave += new System.EventHandler(this.Panel1_MouseEnter_Leave);
@@ -291,8 +291,9 @@
             this.button_Reservation.ButtonTextMarginLeft = 0;
             this.bunifuTransition1.SetDecoration(this.button_Reservation, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.button_Reservation.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(161)))), ((int)(((byte)(161)))));
-            this.button_Reservation.DisabledFillColor = System.Drawing.Color.OrangeRed;
+            this.button_Reservation.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(100)))), ((int)(((byte)(200)))));
             this.button_Reservation.DisabledForecolor = System.Drawing.Color.White;
+            this.button_Reservation.Enabled = false;
             this.button_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_Reservation.ForeColor = System.Drawing.Color.White;
             this.button_Reservation.IconLeftCursor = System.Windows.Forms.Cursors.Default;
@@ -476,11 +477,10 @@
             // 
             this.b_LightDark_theme.Active = false;
             this.b_LightDark_theme.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
-            this.b_LightDark_theme.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.b_LightDark_theme.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.b_LightDark_theme.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.b_LightDark_theme.BorderRadius = 0;
-            this.b_LightDark_theme.ButtonText = "Go Dark mode";
+            this.b_LightDark_theme.ButtonText = "Go Dark";
             this.b_LightDark_theme.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bunifuTransition1.SetDecoration(this.b_LightDark_theme, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.b_LightDark_theme.DisabledColor = System.Drawing.Color.Gray;
@@ -505,7 +505,7 @@
             this.b_LightDark_theme.selected = false;
             this.b_LightDark_theme.Size = new System.Drawing.Size(198, 68);
             this.b_LightDark_theme.TabIndex = 1;
-            this.b_LightDark_theme.Text = "Go Dark mode";
+            this.b_LightDark_theme.Text = "Go Dark";
             this.b_LightDark_theme.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.b_LightDark_theme.Textcolor = System.Drawing.Color.White;
             this.b_LightDark_theme.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -546,6 +546,7 @@
             animation1.TimeCoeff = 0F;
             animation1.TransparencyCoeff = 0F;
             this.bunifuTransition1.DefaultAnimation = animation1;
+            this.bunifuTransition1.Interval = 50;
             // 
             // comboBox_Country
             // 
@@ -573,7 +574,7 @@
             this.comboBox_Country.ItemForeColor = System.Drawing.Color.Black;
             this.comboBox_Country.ItemHeight = 26;
             this.comboBox_Country.ItemHighLightColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
-            this.comboBox_Country.Location = new System.Drawing.Point(242, 89);
+            this.comboBox_Country.Location = new System.Drawing.Point(206, 89);
             this.comboBox_Country.Name = "comboBox_Country";
             this.comboBox_Country.Size = new System.Drawing.Size(217, 32);
             this.comboBox_Country.TabIndex = 42;
@@ -607,7 +608,7 @@
             this.comboBox_city.ItemForeColor = System.Drawing.Color.Black;
             this.comboBox_city.ItemHeight = 26;
             this.comboBox_city.ItemHighLightColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
-            this.comboBox_city.Location = new System.Drawing.Point(545, 89);
+            this.comboBox_city.Location = new System.Drawing.Point(538, 89);
             this.comboBox_city.Name = "comboBox_city";
             this.comboBox_city.Size = new System.Drawing.Size(217, 32);
             this.comboBox_city.TabIndex = 43;
@@ -655,7 +656,7 @@
             this.bunifuTransition1.SetDecoration(this.bunifuLabel2, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
-            this.bunifuLabel2.Location = new System.Drawing.Point(319, 171);
+            this.bunifuLabel2.Location = new System.Drawing.Point(283, 171);
             this.bunifuLabel2.Name = "bunifuLabel2";
             this.bunifuLabel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.bunifuLabel2.Size = new System.Drawing.Size(62, 15);
@@ -691,7 +692,7 @@
             this.tb_RoomName.IconPadding = 10;
             this.tb_RoomName.IconRight = null;
             this.tb_RoomName.IconRightCursor = System.Windows.Forms.Cursors.Default;
-            this.tb_RoomName.Location = new System.Drawing.Point(242, 193);
+            this.tb_RoomName.Location = new System.Drawing.Point(206, 193);
             this.tb_RoomName.MaxLength = 32767;
             this.tb_RoomName.MinimumSize = new System.Drawing.Size(100, 35);
             this.tb_RoomName.Modified = false;
@@ -738,7 +739,7 @@
             this.tb_RoomType.IconPadding = 10;
             this.tb_RoomType.IconRight = null;
             this.tb_RoomType.IconRightCursor = System.Windows.Forms.Cursors.Default;
-            this.tb_RoomType.Location = new System.Drawing.Point(545, 193);
+            this.tb_RoomType.Location = new System.Drawing.Point(538, 193);
             this.tb_RoomType.MaxLength = 32767;
             this.tb_RoomType.MinimumSize = new System.Drawing.Size(100, 35);
             this.tb_RoomType.Modified = false;
@@ -765,7 +766,7 @@
             this.bunifuTransition1.SetDecoration(this.bunifuLabel3, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
-            this.bunifuLabel3.Location = new System.Drawing.Point(624, 171);
+            this.bunifuLabel3.Location = new System.Drawing.Point(617, 171);
             this.bunifuLabel3.Name = "bunifuLabel3";
             this.bunifuLabel3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.bunifuLabel3.Size = new System.Drawing.Size(59, 15);
@@ -863,7 +864,7 @@
             this.bunifuTransition1.SetDecoration(this.bunifuLabel6, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
-            this.bunifuLabel6.Location = new System.Drawing.Point(643, 53);
+            this.bunifuLabel6.Location = new System.Drawing.Point(636, 53);
             this.bunifuLabel6.Name = "bunifuLabel6";
             this.bunifuLabel6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.bunifuLabel6.Size = new System.Drawing.Size(20, 15);
@@ -879,7 +880,7 @@
             this.bunifuTransition1.SetDecoration(this.bunifuLabel7, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuLabel7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
-            this.bunifuLabel7.Location = new System.Drawing.Point(331, 53);
+            this.bunifuLabel7.Location = new System.Drawing.Point(295, 53);
             this.bunifuLabel7.Name = "bunifuLabel7";
             this.bunifuLabel7.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.bunifuLabel7.Size = new System.Drawing.Size(39, 15);
@@ -942,27 +943,30 @@
             this.availeble_Rooms_gridView.HeaderBackColor = System.Drawing.Color.DodgerBlue;
             this.availeble_Rooms_gridView.HeaderBgColor = System.Drawing.Color.Empty;
             this.availeble_Rooms_gridView.HeaderForeColor = System.Drawing.Color.White;
-            this.availeble_Rooms_gridView.Location = new System.Drawing.Point(242, 293);
+            this.availeble_Rooms_gridView.Location = new System.Drawing.Point(206, 293);
             this.availeble_Rooms_gridView.Name = "availeble_Rooms_gridView";
             this.availeble_Rooms_gridView.RowHeadersVisible = false;
             this.availeble_Rooms_gridView.RowTemplate.Height = 40;
             this.availeble_Rooms_gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.availeble_Rooms_gridView.Size = new System.Drawing.Size(823, 437);
+            this.availeble_Rooms_gridView.Size = new System.Drawing.Size(859, 437);
             this.availeble_Rooms_gridView.TabIndex = 54;
             this.availeble_Rooms_gridView.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Light;
             this.availeble_Rooms_gridView.SelectionChanged += new System.EventHandler(this.Availeble_Rooms_gridView_SelectionChanged);
             // 
             // bunifuVScrollBar1
             // 
+            this.bunifuVScrollBar1.AccessibleRole = System.Windows.Forms.AccessibleRole.ScrollBar;
             this.bunifuVScrollBar1.AllowCursorChanges = true;
-            this.bunifuVScrollBar1.AllowHomeEndKeysDetection = false;
+            this.bunifuVScrollBar1.AllowHomeEndKeysDetection = true;
             this.bunifuVScrollBar1.AllowIncrementalClickMoves = true;
             this.bunifuVScrollBar1.AllowMouseDownEffects = true;
             this.bunifuVScrollBar1.AllowMouseHoverEffects = true;
             this.bunifuVScrollBar1.AllowScrollingAnimations = true;
             this.bunifuVScrollBar1.AllowScrollKeysDetection = true;
             this.bunifuVScrollBar1.AllowScrollOptionsMenu = true;
-            this.bunifuVScrollBar1.AllowShrinkingOnFocusLost = false;
+            this.bunifuVScrollBar1.AllowShrinkingOnFocusLost = true;
+            this.bunifuVScrollBar1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.bunifuVScrollBar1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.bunifuVScrollBar1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuVScrollBar1.BackgroundImage")));
             this.bunifuVScrollBar1.BindingContainer = this.availeble_Rooms_gridView;
             this.bunifuVScrollBar1.BorderRadius = 1;
@@ -970,7 +974,7 @@
             this.bunifuTransition1.SetDecoration(this.bunifuVScrollBar1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuVScrollBar1.DurationBeforeShrink = 2000;
             this.bunifuVScrollBar1.LargeChange = 10;
-            this.bunifuVScrollBar1.Location = new System.Drawing.Point(1047, 293);
+            this.bunifuVScrollBar1.Location = new System.Drawing.Point(1071, 293);
             this.bunifuVScrollBar1.Maximum = 100;
             this.bunifuVScrollBar1.Minimum = 0;
             this.bunifuVScrollBar1.MinimumThumbLength = 18;
@@ -981,11 +985,11 @@
             this.bunifuVScrollBar1.ScrollBarBorderColor = System.Drawing.Color.Thistle;
             this.bunifuVScrollBar1.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.bunifuVScrollBar1.ShrinkSizeLimit = 3;
-            this.bunifuVScrollBar1.Size = new System.Drawing.Size(18, 437);
+            this.bunifuVScrollBar1.Size = new System.Drawing.Size(14, 421);
             this.bunifuVScrollBar1.SmallChange = 1;
             this.bunifuVScrollBar1.TabIndex = 55;
             this.bunifuVScrollBar1.ThumbColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
-            this.bunifuVScrollBar1.ThumbLength = 43;
+            this.bunifuVScrollBar1.ThumbLength = 41;
             this.bunifuVScrollBar1.ThumbMargin = 1;
             this.bunifuVScrollBar1.ThumbStyle = Bunifu.UI.WinForms.BunifuVScrollBar.ThumbStyles.Inset;
             this.bunifuVScrollBar1.Value = 0;
@@ -996,6 +1000,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackImage = global::Managementul_Hotelurilor.Properties.Resources.icons8_moon_symbol_48;
             this.ClientSize = new System.Drawing.Size(1088, 753);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.bunifuVScrollBar1);
             this.Controls.Add(this.availeble_Rooms_gridView);
             this.Controls.Add(this.bunifuLabel7);
@@ -1010,7 +1015,6 @@
             this.Controls.Add(this.comboBox_Hotels);
             this.Controls.Add(this.comboBox_city);
             this.Controls.Add(this.comboBox_Country);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.bunifuLabel1);
             this.bunifuTransition1.SetDecoration(this, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);

@@ -46,6 +46,8 @@
             this.richTextBox_ConfirmReservation = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tb_UniqueClientID = new System.Windows.Forms.TextBox();
+            this.tb_Price = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tb_RoomType
@@ -197,11 +199,30 @@
             this.tb_UniqueClientID.Size = new System.Drawing.Size(219, 20);
             this.tb_UniqueClientID.TabIndex = 17;
             // 
+            // tb_Price
+            // 
+            this.tb_Price.Location = new System.Drawing.Point(239, 195);
+            this.tb_Price.Name = "tb_Price";
+            this.tb_Price.ReadOnly = true;
+            this.tb_Price.Size = new System.Drawing.Size(219, 20);
+            this.tb_Price.TabIndex = 18;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(249, 179);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Price with taxes";
+            // 
             // ReserveRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(470, 452);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.tb_Price);
             this.Controls.Add(this.tb_UniqueClientID);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.richTextBox_ConfirmReservation);
@@ -221,9 +242,7 @@
             this.Controls.Add(this.tb_RoomType);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "ReserveRoom";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reserve Room";
             this.Load += new System.EventHandler(this.ReserveRoom_Load);
             this.ResumeLayout(false);
@@ -250,5 +269,7 @@
         private System.Windows.Forms.RichTextBox richTextBox_ConfirmReservation;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tb_UniqueClientID;
+        private System.Windows.Forms.TextBox tb_Price;
+        private System.Windows.Forms.Label label8;
     }
 }

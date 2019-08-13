@@ -41,5 +41,26 @@ namespace Managementul_Hotelurilor.DAL
                     LogMessage(exception); 
             }
         }
+        public static void WriteCSV(Entities.Rent_Rooms rent_Rooms, Entities.Rooms rooms)
+        {
+            string path = @"Rents.csv";
+            if (File.Exists(path))
+            {
+                using (var csv = new StreamWriter(path, true))
+                {
+                    
+                    csv.WriteLine(String.Format("{0},{1},{2},{3},{4},{5}", rooms.Hotel_ID,rooms.Room_ID,rooms.Room_Name,rent_Rooms.ReservationID,rent_Rooms.START_DATE,rent_Rooms.END_DATE));
+                }
+            }
+            else
+            {
+                using (var csv = new StreamWriter(path, true))
+                {
+                    csv.WriteLine("Hotel,Room,Room type,Boocking ID,Boovking start date, boovking end date");
+                }
+                WriteCSV(rent_Rooms,rooms);
+            }
+        }
+
     }
 }

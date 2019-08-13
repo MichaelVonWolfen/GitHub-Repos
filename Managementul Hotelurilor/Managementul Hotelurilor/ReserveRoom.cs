@@ -8,14 +8,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
+using System.Globalization;
 
 namespace Managementul_Hotelurilor
 {
     public partial class ReserveRoom : MetroFramework.Forms.MetroForm
     {
-        public ReserveRoom()
+        private double VAT;
+        private string currency;
+        public ReserveRoom(string Country)
         {
             InitializeComponent();
+            try
+            {
+                //List<RegionInfo> Reg = new List<RegionInfo>();
+
+                VAT = DAL.GlobalDictionary.Vat[Country];
+                var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
+                var Region = regions.FirstOrDefault(region => region.EnglishName.Contains(Country));
+                currency = Region.CurrencySymbol;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void B_CommitReservation_Click(object sender, EventArgs e)
@@ -62,7 +79,8 @@ namespace Managementul_Hotelurilor
                                                   "Room ID: " + rented_Room.ROOM_ID + "\n" +
                                                   "Date Coming: " + rented_Room.START_DATE + "\n" +
                                                   "DateLeaving: " + rented_Room.END_DATE + "\n" +
-                                                  "Reservation Identifier:" + rented_Room.ReservationID;
+                                                  "Reservation Identifier:" + rented_Room.ReservationID + "\n\n" +
+                                                  "Total Cost: " + Form1.ReserveRoom.Price * (1 + VAT / 100) + " " + currency;
         }
         private void MakeReservation()
         {
@@ -75,10 +93,17 @@ namespace Managementul_Hotelurilor
                             Entities.Rent_Rooms rent = new Entities.Rent_Rooms(dateComming_picker.Value, dateLeaving_picker.Value, Int32.Parse(tb_RoomID.Text),tb_UniqueClientID.Text);
                             DAL.Dal_Rent_Rooms.InsertRenter(rent);
                             AddConfirmationRichTextbox(rent);
+
+                            //DONE: Send a confirmation email
+                            SendEmail();
+                            //Solved: Add all data to a CSV file
+
+                            SaveToCSV(rent, Form1.ReserveRoom);
+
                             //MessageBox.Show("Room succesfully Rented in period " + dateComming_picker.Value.ToString() + "-" + dateLeaving_picker.Value.ToString());
                             //this.Close(); 
                         }
-                        catch(OracleException OE)
+                        catch (OracleException OE)
                         {
 
                             DAL.Log.LogMessage(OE);
@@ -101,11 +126,17 @@ namespace Managementul_Hotelurilor
         {
             var Room = Form1.ReserveRoom;
 
-            tb_Hotel.Text = Room.Hotel_ID.ToString();
+
+            tb_Hotel.Text = DAL.GlobalDictionary.HotelsDictionary[Room.Hotel_ID].ToString();
             tb_RoomID.Text = Room.Room_ID.ToString();
             tb_RoomType.Text = Room.Room_Name;
             tb_FamilyOriented.Text = Room.FamilyType;
             tb_UniqueClientID.Text = GenerateUniqueID();
+
+            double price = Room.Price * (1 + (VAT / 100));
+            //TO DO: Add checker for switz pricing
+            tb_Price.Text = (price).ToString() +" "+ currency;
+            
 
 
         }
@@ -117,10 +148,44 @@ namespace Managementul_Hotelurilor
         }
         private void ReserveRoom_Load(object sender, EventArgs e)
         {
+            FormBorderStyle = FormBorderStyle.None;
             AllTextboxReservation_Update();
             Error_LABEL.Text = "";
             dateComming_picker.CustomFormat = "dd MMM yyyy";
             dateLeaving_picker.CustomFormat = "dd MMM yyyy";
+        }
+
+        private void SendEmail()
+        {
+            var Room = Form1.ReserveRoom;
+         
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("hotelmanagement8.2019@gmail.com");
+                mail.To.Add("mihai_stoica66@yahoo.com");
+                mail.Subject = "Confirm Reservation.";
+                mail.Body = String.Format("\tWe happily confirm your reservation in room {0}, in the Hotel {1}," +
+                                            "with is {2} that costs {3} {8} per day." +
+                                            "\n\t Your reservation starts on {4} and ends on {5}." +
+                                            "\n\n\t\t\tTotal Price:{7} {8}\n" +
+                                            "\nFor any issues please use your order ID when contacting us: {6}" +
+                                            "\n\n Have a nice day! :)",
+                                            Room.Room_ID,DAL.GlobalDictionary.HotelsDictionary[Room.Hotel_ID], Room.FamilyType, Room.Price * (1 + VAT / 100), dateComming_picker.Value.ToString("dd MM yyyy"), dateLeaving_picker.Value.ToString("dd MM yyyy"),
+                                            tb_UniqueClientID.Text,(Room.Price*(1+VAT/100)*(dateLeaving_picker.Value - dateComming_picker.Value).TotalDays), currency);
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("hotelmanagement8.2019", "HotelManagement#1");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+                MessageBox.Show("Confirmation mail Sent!");
+            
+           
+        }
+        private void SaveToCSV(Entities.Rent_Rooms rent_Rooms, Entities.Rooms rooms)
+        {
+            DAL.Log.WriteCSV(rent_Rooms, rooms);
         }
     }
 }
