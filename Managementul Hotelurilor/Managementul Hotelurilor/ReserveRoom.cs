@@ -47,7 +47,8 @@ namespace Managementul_Hotelurilor
             }
             if(timeLeaving.CompareTo(timeComming) < 0)
             {
-                Error_LABEL.Text = "Error:\n" + timeComming.ToString("dd MMM yyyy") + " greater than " + timeLeaving.Date.ToString("dd MMM yyyy") +
+                richTextBox_ConfReservationOrShowError.ForeColor = Color.Red;
+                richTextBox_ConfReservationOrShowError.Text = "Error:\n" + timeComming.ToString("dd MMM yyyy") + " greater than " + timeLeaving.Date.ToString("dd MMM yyyy") +
                                                 "\nDate leaving must be grater than comming date.";
                 return;
             }
@@ -74,13 +75,14 @@ namespace Managementul_Hotelurilor
         }
         private void AddConfirmationRichTextbox(Entities.Rent_Rooms rented_Room)
         {
-            richTextBox_ConfirmReservation.Text = "Confirm Reservation!\n" +
+            richTextBox_ConfReservationOrShowError.ForeColor = Color.FromArgb(52, 106, 237);
+            richTextBox_ConfReservationOrShowError.Text = String.Format("Confirm Reservation!\n" +
                                                   "User: UNDEFINED TODO :P\n" +
                                                   "Room ID: " + rented_Room.ROOM_ID + "\n" +
                                                   "Date Coming: " + rented_Room.START_DATE + "\n" +
                                                   "DateLeaving: " + rented_Room.END_DATE + "\n" +
                                                   "Reservation Identifier:" + rented_Room.ReservationID + "\n\n" +
-                                                  "Total Cost: " + Form1.ReserveRoom.Price * (1 + VAT / 100) + " " + currency;
+                                                  "Total Cost: " + AddVAT(Form1.ReserveRoom.Price, VAT) + " " + currency);
         }
         private void MakeReservation()
         {
@@ -133,7 +135,7 @@ namespace Managementul_Hotelurilor
             tb_FamilyOriented.Text = Room.FamilyType;
             tb_UniqueClientID.Text = GenerateUniqueID();
 
-            double price = Room.Price * (1 + (VAT / 100));
+            double price = AddVAT(Room.Price, VAT);
             //TO DO: Add checker for switz pricing
             tb_Price.Text = (price).ToString() +" "+ currency;
             
@@ -150,7 +152,7 @@ namespace Managementul_Hotelurilor
         {
             FormBorderStyle = FormBorderStyle.None;
             AllTextboxReservation_Update();
-            Error_LABEL.Text = "";
+            richTextBox_ConfReservationOrShowError.Text = "";
             dateComming_picker.CustomFormat = "dd MMM yyyy";
             dateLeaving_picker.CustomFormat = "dd MMM yyyy";
         }
@@ -171,8 +173,8 @@ namespace Managementul_Hotelurilor
                                             "\n\n\t\t\tTotal Price:{7} {8}\n" +
                                             "\nFor any issues please use your order ID when contacting us: {6}" +
                                             "\n\n Have a nice day! :)",
-                                            Room.Room_ID,DAL.GlobalDictionary.HotelsDictionary[Room.Hotel_ID], Room.FamilyType, Room.Price * (1 + VAT / 100), dateComming_picker.Value.ToString("dd MM yyyy"), dateLeaving_picker.Value.ToString("dd MM yyyy"),
-                                            tb_UniqueClientID.Text,(Room.Price*(1+VAT/100)*(dateLeaving_picker.Value - dateComming_picker.Value).TotalDays), currency);
+                                            Room.Room_ID,DAL.GlobalDictionary.HotelsDictionary[Room.Hotel_ID], Room.FamilyType, AddVAT(Room.Price, VAT), dateComming_picker.Value.ToString("dd MM yyyy"), dateLeaving_picker.Value.ToString("dd MM yyyy"),
+                                            tb_UniqueClientID.Text,GetFullPriceWithVAT(Room.Price,VAT), currency);
 
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("hotelmanagement8.2019", "HotelManagement#1");
@@ -186,6 +188,47 @@ namespace Managementul_Hotelurilor
         private void SaveToCSV(Entities.Rent_Rooms rent_Rooms, Entities.Rooms rooms)
         {
             DAL.Log.WriteCSV(rent_Rooms, rooms);
+        }
+        private double AddVAT(double costWithoutVAT, double VAT)
+        {
+            double costWithVAT;
+            costWithVAT = costWithoutVAT * (1 + VAT / 100);
+            if (costWithVAT - (int)costWithVAT > 0.5)
+                return (int)costWithVAT + 0.5;
+            else
+                return (int)costWithVAT;
+            
+        }
+        private double GetFullPrice(double price)
+        {
+            return price * (dateLeaving_picker.Value - dateComming_picker.Value).TotalDays;
+        }
+        private double GetFullPriceWithVAT(double price, double VAT)
+        {
+            return AddVAT(GetFullPrice(price), VAT);
+        }
+        private void DateLeaving_picker_ValueChanged(object sender, EventArgs e)
+        {
+            tb_FullPrice.Text = string.Format("{0} {1}",GetFullPriceWithVAT(Form1.ReserveRoom.Price, VAT),currency);
+            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price), currency);
+        }
+
+        private void DateComming_picker_ValueChanged(object sender, EventArgs e)
+        {
+            tb_FullPrice.Text = string.Format("{0} {1}", GetFullPriceWithVAT(Form1.ReserveRoom.Price, VAT), currency);
+            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price), currency);
+        }
+
+        private void B_calculator_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tb_Manually_CalculatedFullPrice.Text = String.Format("{0} {1}", AddVAT(Double.Parse(tb_ManualPrice.Text), Double.Parse(tb_ManualVAT.Text)), currency);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

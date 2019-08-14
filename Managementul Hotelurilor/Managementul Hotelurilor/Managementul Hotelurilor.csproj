@@ -49,6 +49,9 @@
     <Reference Include="Bunifu.UI.WinForms.BunifuDataGridView">
       <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuDataGridView.dll</HintPath>
     </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuDatePicker">
+      <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuDatePicker.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuDropdown">
       <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuDropdown.dll</HintPath>
     </Reference>
@@ -57,6 +60,12 @@
     </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuLabel">
       <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuLabel.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuPictureBox">
+      <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuPictureBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuRadioButton">
+      <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuRadioButton.dll</HintPath>
     </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuScrollBar">
       <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuScrollBar.dll</HintPath>
@@ -186,6 +195,7 @@
   <ItemGroup>
     <Content Include="Icons\hotel.ico.png" />
     <Content Include="Icons\Icons8-Windows-8-City-Hotel.ico" />
+    <None Include="Resources\icons8_menu_48.png" />
     <None Include="Resources\icons8_sun_d_48.png" />
     <None Include="Resources\icons8_sun_48.png" />
     <None Include="Resources\icons8_search_d_48.png" />

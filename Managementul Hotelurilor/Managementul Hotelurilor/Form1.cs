@@ -63,6 +63,7 @@ namespace Managementul_Hotelurilor
         }
         private void B_Reset_Click(object sender, EventArgs e)
         {
+            panel_for_current_selected.Location = new Point(0, b_Reset.Location.Y);
             comboBox_Country.Items.Clear();
             comboBox_Country.Enabled = false;
             b_Hotels.Enabled = true;
@@ -100,6 +101,7 @@ namespace Managementul_Hotelurilor
 
         private void B_Hotels_Click(object sender, EventArgs e)
         {
+            panel_for_current_selected.Location = new Point(0, b_Hotels.Location.Y);
             comboBox_Country.Enabled = true;
             comboBox_Country.Sorted = true;
             comboBox_Country.Items.Clear();
@@ -152,6 +154,7 @@ namespace Managementul_Hotelurilor
         #region View Ocupied AND Not Ocupied Rooms
         private void B_Rooms_Click(object sender, EventArgs e)
         {
+            panel_for_current_selected.Location = new Point(0, b_RoomsOcupied.Location.Y);
             Form_Reservations form_Reservations = new Form_Reservations("SelectAllRoomsOcupied");
             form_Reservations.Text = "Ocupied Rooms from all Hotels";
             FormCollection fc = Application.OpenForms;
@@ -170,6 +173,8 @@ namespace Managementul_Hotelurilor
         }
         private void B_UnocupiedRooms_Click(object sender, EventArgs e)
         {
+            panel_for_current_selected.Location = new Point(0, b_UnocupiedRooms.Location.Y);
+
             Form_Reservations form_Reservations = new Form_Reservations("SelectAllRoomsNOTOcupied");
             form_Reservations.Text = "Unocupied Rooms from all Hotels";
             FormCollection fc = Application.OpenForms;
@@ -233,9 +238,9 @@ namespace Managementul_Hotelurilor
                         }
                         break;
                     }
-                    catch(Exception ex)
+                    catch(OracleException ex)
                     {
-
+                        DAL.Log.LogMessage(ex);
                     }
                 }
             }
@@ -243,6 +248,7 @@ namespace Managementul_Hotelurilor
 
         private void Button_Reservation_Click(object sender, EventArgs e)
         {
+            panel_for_current_selected.Location = new Point(0, button_Reservation.Location.Y);
 
             ReserveRoom rooms = new ReserveRoom(comboBox_Country.Text);
             FormCollection fc = Application.OpenForms;
@@ -283,7 +289,7 @@ namespace Managementul_Hotelurilor
         {
 
         }
-        private bool MenuExpanded = false;
+        //private bool MenuExpanded = false;
         private void MouseDetect_Tick(object sender, EventArgs e)
         {
             /*

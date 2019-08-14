@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Managementul_Hotelurilor
 {
-    public partial class Form_Reservations : Form
+    public partial class Form_Reservations : MetroFramework.Forms.MetroForm
     {
         private string StoreProcName;
         public Form_Reservations(string StoreProcName)

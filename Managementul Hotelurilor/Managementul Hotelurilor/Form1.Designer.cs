@@ -30,15 +30,22 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            Bunifu.UI.WinForms.BunifuAnimatorNS.Animation animation2 = new Bunifu.UI.WinForms.BunifuAnimatorNS.Animation();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            Bunifu.UI.WinForms.BunifuAnimatorNS.Animation animation1 = new Bunifu.UI.WinForms.BunifuAnimatorNS.Animation();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroStyleManager_change_to_dark_or_light_mode = new MetroFramework.Components.MetroStyleManager(this.components);
             this.bunifuLabel1 = new Bunifu.UI.WinForms.BunifuLabel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.bunifuPictureBox1 = new Bunifu.UI.WinForms.BunifuPictureBox();
+            this.panel_for_current_selected = new System.Windows.Forms.Panel();
+            this.button_Reservation = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.b_RoomsOcupied = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.b_UnocupiedRooms = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.b_Hotels = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.b_Reset = new Bunifu.Framework.UI.BunifuFlatButton();
             this.b_LightDark_theme = new Bunifu.Framework.UI.BunifuFlatButton();
+            this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.MouseDetect = new System.Windows.Forms.Timer(this.components);
             this.bunifuTransition1 = new Bunifu.UI.WinForms.BunifuTransition(this.components);
@@ -56,13 +63,9 @@
             this.bunifuLabel7 = new Bunifu.UI.WinForms.BunifuLabel();
             this.availeble_Rooms_gridView = new Bunifu.UI.WinForms.BunifuDataGridView();
             this.bunifuVScrollBar1 = new Bunifu.UI.WinForms.BunifuVScrollBar();
-            this.b_Reset = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.b_Hotels = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.b_UnocupiedRooms = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.b_RoomsOcupied = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.button_Reservation = new Bunifu.Framework.UI.BunifuFlatButton();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager_change_to_dark_or_light_mode)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.availeble_Rooms_gridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,6 +95,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.panel1.Controls.Add(this.bunifuPictureBox1);
+            this.panel1.Controls.Add(this.panel_for_current_selected);
             this.panel1.Controls.Add(this.button_Reservation);
             this.panel1.Controls.Add(this.b_RoomsOcupied);
             this.panel1.Controls.Add(this.b_UnocupiedRooms);
@@ -107,19 +112,215 @@
             this.panel1.MouseEnter += new System.EventHandler(this.Panel1_MouseEnter_Leave);
             this.panel1.MouseLeave += new System.EventHandler(this.Panel1_MouseEnter_Leave);
             // 
-            // bunifuCustomLabel1
+            // bunifuPictureBox1
             // 
-            this.bunifuCustomLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.bunifuCustomLabel1.AutoSize = true;
-            this.bunifuTransition1.SetDecoration(this.bunifuCustomLabel1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            this.bunifuCustomLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuCustomLabel1.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.bunifuCustomLabel1.Location = new System.Drawing.Point(34, 38);
-            this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
-            this.bunifuCustomLabel1.Size = new System.Drawing.Size(127, 26);
-            this.bunifuCustomLabel1.TabIndex = 3;
-            this.bunifuCustomLabel1.Text = "Dashboard";
+            this.bunifuPictureBox1.AllowFocused = false;
+            this.bunifuPictureBox1.BorderRadius = 24;
+            this.bunifuTransition1.SetDecoration(this.bunifuPictureBox1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.bunifuPictureBox1.Image = global::Managementul_Hotelurilor.Properties.Resources.icons8_menu_48;
+            this.bunifuPictureBox1.IsCircle = true;
+            this.bunifuPictureBox1.Location = new System.Drawing.Point(6, 38);
+            this.bunifuPictureBox1.Name = "bunifuPictureBox1";
+            this.bunifuPictureBox1.Size = new System.Drawing.Size(48, 48);
+            this.bunifuPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.bunifuPictureBox1.TabIndex = 52;
+            this.bunifuPictureBox1.TabStop = false;
+            this.bunifuPictureBox1.Type = Bunifu.UI.WinForms.BunifuPictureBox.Types.Square;
+            // 
+            // panel_for_current_selected
+            // 
+            this.panel_for_current_selected.BackColor = System.Drawing.Color.White;
+            this.bunifuTransition1.SetDecoration(this.panel_for_current_selected, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.panel_for_current_selected.Location = new System.Drawing.Point(0, 111);
+            this.panel_for_current_selected.Name = "panel_for_current_selected";
+            this.panel_for_current_selected.Size = new System.Drawing.Size(6, 60);
+            this.panel_for_current_selected.TabIndex = 51;
+            // 
+            // button_Reservation
+            // 
+            this.button_Reservation.Active = false;
+            this.button_Reservation.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
+            this.button_Reservation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button_Reservation.BorderRadius = 0;
+            this.button_Reservation.ButtonText = "Reserve";
+            this.button_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuTransition1.SetDecoration(this.button_Reservation, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.button_Reservation.DisabledColor = System.Drawing.Color.Gray;
+            this.button_Reservation.Enabled = false;
+            this.button_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_Reservation.Iconcolor = System.Drawing.Color.Transparent;
+            this.button_Reservation.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_reservation_48;
+            this.button_Reservation.Iconimage_right = null;
+            this.button_Reservation.Iconimage_right_Selected = null;
+            this.button_Reservation.Iconimage_Selected = null;
+            this.button_Reservation.IconMarginLeft = 0;
+            this.button_Reservation.IconMarginRight = 0;
+            this.button_Reservation.IconRightVisible = true;
+            this.button_Reservation.IconRightZoom = 0D;
+            this.button_Reservation.IconVisible = true;
+            this.button_Reservation.IconZoom = 90D;
+            this.button_Reservation.IsTab = false;
+            this.button_Reservation.Location = new System.Drawing.Point(1, 349);
+            this.button_Reservation.Name = "button_Reservation";
+            this.button_Reservation.Normalcolor = System.Drawing.Color.Empty;
+            this.button_Reservation.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
+            this.button_Reservation.OnHoverTextColor = System.Drawing.Color.White;
+            this.button_Reservation.selected = false;
+            this.button_Reservation.Size = new System.Drawing.Size(196, 61);
+            this.button_Reservation.TabIndex = 50;
+            this.button_Reservation.Text = "Reserve";
+            this.button_Reservation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_Reservation.Textcolor = System.Drawing.Color.White;
+            this.button_Reservation.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.button_Reservation.Click += new System.EventHandler(this.Button_Reservation_Click);
+            // 
+            // b_RoomsOcupied
+            // 
+            this.b_RoomsOcupied.Active = false;
+            this.b_RoomsOcupied.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
+            this.b_RoomsOcupied.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.b_RoomsOcupied.BorderRadius = 0;
+            this.b_RoomsOcupied.ButtonText = "Boocked";
+            this.b_RoomsOcupied.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuTransition1.SetDecoration(this.b_RoomsOcupied, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.b_RoomsOcupied.DisabledColor = System.Drawing.Color.Gray;
+            this.b_RoomsOcupied.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_RoomsOcupied.Iconcolor = System.Drawing.Color.Transparent;
+            this.b_RoomsOcupied.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_saving_book_48;
+            this.b_RoomsOcupied.Iconimage_right = null;
+            this.b_RoomsOcupied.Iconimage_right_Selected = null;
+            this.b_RoomsOcupied.Iconimage_Selected = null;
+            this.b_RoomsOcupied.IconMarginLeft = 0;
+            this.b_RoomsOcupied.IconMarginRight = 0;
+            this.b_RoomsOcupied.IconRightVisible = true;
+            this.b_RoomsOcupied.IconRightZoom = 0D;
+            this.b_RoomsOcupied.IconVisible = true;
+            this.b_RoomsOcupied.IconZoom = 90D;
+            this.b_RoomsOcupied.IsTab = false;
+            this.b_RoomsOcupied.Location = new System.Drawing.Point(2, 227);
+            this.b_RoomsOcupied.Name = "b_RoomsOcupied";
+            this.b_RoomsOcupied.Normalcolor = System.Drawing.Color.Empty;
+            this.b_RoomsOcupied.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
+            this.b_RoomsOcupied.OnHoverTextColor = System.Drawing.Color.White;
+            this.b_RoomsOcupied.selected = false;
+            this.b_RoomsOcupied.Size = new System.Drawing.Size(196, 61);
+            this.b_RoomsOcupied.TabIndex = 49;
+            this.b_RoomsOcupied.Text = "Boocked";
+            this.b_RoomsOcupied.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.b_RoomsOcupied.Textcolor = System.Drawing.Color.White;
+            this.b_RoomsOcupied.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.b_RoomsOcupied.Click += new System.EventHandler(this.B_Rooms_Click);
+            // 
+            // b_UnocupiedRooms
+            // 
+            this.b_UnocupiedRooms.Active = false;
+            this.b_UnocupiedRooms.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
+            this.b_UnocupiedRooms.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.b_UnocupiedRooms.BorderRadius = 0;
+            this.b_UnocupiedRooms.ButtonText = "Not Boocked";
+            this.b_UnocupiedRooms.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuTransition1.SetDecoration(this.b_UnocupiedRooms, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.b_UnocupiedRooms.DisabledColor = System.Drawing.Color.Gray;
+            this.b_UnocupiedRooms.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_UnocupiedRooms.Iconcolor = System.Drawing.Color.Transparent;
+            this.b_UnocupiedRooms.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_generic_book_file_type_48;
+            this.b_UnocupiedRooms.Iconimage_right = null;
+            this.b_UnocupiedRooms.Iconimage_right_Selected = null;
+            this.b_UnocupiedRooms.Iconimage_Selected = null;
+            this.b_UnocupiedRooms.IconMarginLeft = 0;
+            this.b_UnocupiedRooms.IconMarginRight = 0;
+            this.b_UnocupiedRooms.IconRightVisible = true;
+            this.b_UnocupiedRooms.IconRightZoom = 0D;
+            this.b_UnocupiedRooms.IconVisible = true;
+            this.b_UnocupiedRooms.IconZoom = 90D;
+            this.b_UnocupiedRooms.IsTab = false;
+            this.b_UnocupiedRooms.Location = new System.Drawing.Point(0, 288);
+            this.b_UnocupiedRooms.Name = "b_UnocupiedRooms";
+            this.b_UnocupiedRooms.Normalcolor = System.Drawing.Color.Empty;
+            this.b_UnocupiedRooms.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
+            this.b_UnocupiedRooms.OnHoverTextColor = System.Drawing.Color.White;
+            this.b_UnocupiedRooms.selected = false;
+            this.b_UnocupiedRooms.Size = new System.Drawing.Size(197, 61);
+            this.b_UnocupiedRooms.TabIndex = 48;
+            this.b_UnocupiedRooms.Text = "Not Boocked";
+            this.b_UnocupiedRooms.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.b_UnocupiedRooms.Textcolor = System.Drawing.Color.White;
+            this.b_UnocupiedRooms.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.b_UnocupiedRooms.Click += new System.EventHandler(this.B_UnocupiedRooms_Click);
+            // 
+            // b_Hotels
+            // 
+            this.b_Hotels.Active = false;
+            this.b_Hotels.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
+            this.b_Hotels.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.b_Hotels.BorderRadius = 0;
+            this.b_Hotels.ButtonText = "Find Rooms";
+            this.b_Hotels.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuTransition1.SetDecoration(this.b_Hotels, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.b_Hotels.DisabledColor = System.Drawing.Color.Gray;
+            this.b_Hotels.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_Hotels.Iconcolor = System.Drawing.Color.Transparent;
+            this.b_Hotels.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_search_48;
+            this.b_Hotels.Iconimage_right = null;
+            this.b_Hotels.Iconimage_right_Selected = null;
+            this.b_Hotels.Iconimage_Selected = null;
+            this.b_Hotels.IconMarginLeft = 0;
+            this.b_Hotels.IconMarginRight = 0;
+            this.b_Hotels.IconRightVisible = true;
+            this.b_Hotels.IconRightZoom = 0D;
+            this.b_Hotels.IconVisible = true;
+            this.b_Hotels.IconZoom = 90D;
+            this.b_Hotels.IsTab = false;
+            this.b_Hotels.Location = new System.Drawing.Point(0, 166);
+            this.b_Hotels.Name = "b_Hotels";
+            this.b_Hotels.Normalcolor = System.Drawing.Color.Empty;
+            this.b_Hotels.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
+            this.b_Hotels.OnHoverTextColor = System.Drawing.Color.White;
+            this.b_Hotels.selected = false;
+            this.b_Hotels.Size = new System.Drawing.Size(197, 61);
+            this.b_Hotels.TabIndex = 47;
+            this.b_Hotels.Text = "Find Rooms";
+            this.b_Hotels.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.b_Hotels.Textcolor = System.Drawing.Color.White;
+            this.b_Hotels.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.b_Hotels.Click += new System.EventHandler(this.B_Hotels_Click);
+            // 
+            // b_Reset
+            // 
+            this.b_Reset.Active = false;
+            this.b_Reset.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
+            this.b_Reset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.b_Reset.BorderRadius = 0;
+            this.b_Reset.ButtonText = "Reset";
+            this.b_Reset.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.bunifuTransition1.SetDecoration(this.b_Reset, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.b_Reset.DisabledColor = System.Drawing.Color.Gray;
+            this.b_Reset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_Reset.Iconcolor = System.Drawing.Color.Transparent;
+            this.b_Reset.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_reboot_48;
+            this.b_Reset.Iconimage_right = null;
+            this.b_Reset.Iconimage_right_Selected = null;
+            this.b_Reset.Iconimage_Selected = null;
+            this.b_Reset.IconMarginLeft = 0;
+            this.b_Reset.IconMarginRight = 0;
+            this.b_Reset.IconRightVisible = true;
+            this.b_Reset.IconRightZoom = 0D;
+            this.b_Reset.IconVisible = true;
+            this.b_Reset.IconZoom = 90D;
+            this.b_Reset.IsTab = false;
+            this.b_Reset.Location = new System.Drawing.Point(1, 105);
+            this.b_Reset.Name = "b_Reset";
+            this.b_Reset.Normalcolor = System.Drawing.Color.Empty;
+            this.b_Reset.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
+            this.b_Reset.OnHoverTextColor = System.Drawing.Color.White;
+            this.b_Reset.selected = false;
+            this.b_Reset.Size = new System.Drawing.Size(196, 61);
+            this.b_Reset.TabIndex = 46;
+            this.b_Reset.Text = "Reset";
+            this.b_Reset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.b_Reset.Textcolor = System.Drawing.Color.White;
+            this.b_Reset.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.b_Reset.Click += new System.EventHandler(this.B_Reset_Click);
             // 
             // b_LightDark_theme
             // 
@@ -158,6 +359,20 @@
             this.b_LightDark_theme.Textcolor = System.Drawing.Color.White;
             this.b_LightDark_theme.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
+            // bunifuCustomLabel1
+            // 
+            this.bunifuCustomLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.bunifuCustomLabel1.AutoSize = true;
+            this.bunifuTransition1.SetDecoration(this.bunifuCustomLabel1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
+            this.bunifuCustomLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuCustomLabel1.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.bunifuCustomLabel1.Location = new System.Drawing.Point(50, 49);
+            this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
+            this.bunifuCustomLabel1.Size = new System.Drawing.Size(127, 26);
+            this.bunifuCustomLabel1.TabIndex = 3;
+            this.bunifuCustomLabel1.Text = "Dashboard";
+            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -178,22 +393,22 @@
             // 
             this.bunifuTransition1.AnimationType = Bunifu.UI.WinForms.BunifuAnimatorNS.AnimationType.HorizSlide;
             this.bunifuTransition1.Cursor = null;
-            animation2.AnimateOnlyDifferences = true;
-            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
-            animation2.LeafCoeff = 0F;
-            animation2.MaxTime = 1F;
-            animation2.MinTime = 0F;
-            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
-            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
-            animation2.MosaicSize = 0;
-            animation2.Padding = new System.Windows.Forms.Padding(0);
-            animation2.RotateCoeff = 0F;
-            animation2.RotateLimit = 0F;
-            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
-            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
-            animation2.TimeCoeff = 0F;
-            animation2.TransparencyCoeff = 0F;
-            this.bunifuTransition1.DefaultAnimation = animation2;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.bunifuTransition1.DefaultAnimation = animation1;
             this.bunifuTransition1.Interval = 50;
             // 
             // comboBox_Country
@@ -540,10 +755,12 @@
             // availeble_Rooms_gridView
             // 
             this.availeble_Rooms_gridView.AllowCustomTheming = false;
+            this.availeble_Rooms_gridView.AllowUserToAddRows = false;
+            this.availeble_Rooms_gridView.AllowUserToDeleteRows = false;
             this.availeble_Rooms_gridView.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            this.availeble_Rooms_gridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.availeble_Rooms_gridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.availeble_Rooms_gridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -552,14 +769,14 @@
             this.availeble_Rooms_gridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.availeble_Rooms_gridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.availeble_Rooms_gridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.availeble_Rooms_gridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.availeble_Rooms_gridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.availeble_Rooms_gridView.ColumnHeadersHeight = 40;
             this.availeble_Rooms_gridView.CurrentTheme.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
             this.availeble_Rooms_gridView.CurrentTheme.AlternatingRowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
@@ -578,14 +795,14 @@
             this.availeble_Rooms_gridView.CurrentTheme.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
             this.availeble_Rooms_gridView.CurrentTheme.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.bunifuTransition1.SetDecoration(this.availeble_Rooms_gridView, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.availeble_Rooms_gridView.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.availeble_Rooms_gridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.availeble_Rooms_gridView.EnableHeadersVisualStyles = false;
             this.availeble_Rooms_gridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
             this.availeble_Rooms_gridView.HeaderBackColor = System.Drawing.Color.DodgerBlue;
@@ -593,6 +810,7 @@
             this.availeble_Rooms_gridView.HeaderForeColor = System.Drawing.Color.White;
             this.availeble_Rooms_gridView.Location = new System.Drawing.Point(206, 293);
             this.availeble_Rooms_gridView.Name = "availeble_Rooms_gridView";
+            this.availeble_Rooms_gridView.ReadOnly = true;
             this.availeble_Rooms_gridView.RowHeadersVisible = false;
             this.availeble_Rooms_gridView.RowTemplate.Height = 40;
             this.availeble_Rooms_gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -622,7 +840,7 @@
             this.bunifuTransition1.SetDecoration(this.bunifuVScrollBar1, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
             this.bunifuVScrollBar1.DurationBeforeShrink = 2000;
             this.bunifuVScrollBar1.LargeChange = 10;
-            this.bunifuVScrollBar1.Location = new System.Drawing.Point(1071, 293);
+            this.bunifuVScrollBar1.Location = new System.Drawing.Point(1071, 231);
             this.bunifuVScrollBar1.Maximum = 100;
             this.bunifuVScrollBar1.Minimum = 0;
             this.bunifuVScrollBar1.MinimumThumbLength = 18;
@@ -641,191 +859,6 @@
             this.bunifuVScrollBar1.ThumbMargin = 1;
             this.bunifuVScrollBar1.ThumbStyle = Bunifu.UI.WinForms.BunifuVScrollBar.ThumbStyles.Inset;
             this.bunifuVScrollBar1.Value = 0;
-            // 
-            // b_Reset
-            // 
-            this.b_Reset.Active = false;
-            this.b_Reset.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
-            this.b_Reset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.b_Reset.BorderRadius = 0;
-            this.b_Reset.ButtonText = "Reset";
-            this.b_Reset.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuTransition1.SetDecoration(this.b_Reset, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            this.b_Reset.DisabledColor = System.Drawing.Color.Gray;
-            this.b_Reset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_Reset.Iconcolor = System.Drawing.Color.Transparent;
-            this.b_Reset.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_reboot_48;
-            this.b_Reset.Iconimage_right = null;
-            this.b_Reset.Iconimage_right_Selected = null;
-            this.b_Reset.Iconimage_Selected = null;
-            this.b_Reset.IconMarginLeft = 0;
-            this.b_Reset.IconMarginRight = 0;
-            this.b_Reset.IconRightVisible = true;
-            this.b_Reset.IconRightZoom = 0D;
-            this.b_Reset.IconVisible = true;
-            this.b_Reset.IconZoom = 90D;
-            this.b_Reset.IsTab = false;
-            this.b_Reset.Location = new System.Drawing.Point(0, 105);
-            this.b_Reset.Name = "b_Reset";
-            this.b_Reset.Normalcolor = System.Drawing.Color.Empty;
-            this.b_Reset.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
-            this.b_Reset.OnHoverTextColor = System.Drawing.Color.White;
-            this.b_Reset.selected = false;
-            this.b_Reset.Size = new System.Drawing.Size(201, 61);
-            this.b_Reset.TabIndex = 46;
-            this.b_Reset.Text = "Reset";
-            this.b_Reset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.b_Reset.Textcolor = System.Drawing.Color.White;
-            this.b_Reset.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.b_Reset.Click += new System.EventHandler(this.B_Reset_Click);
-            // 
-            // b_Hotels
-            // 
-            this.b_Hotels.Active = false;
-            this.b_Hotels.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
-            this.b_Hotels.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.b_Hotels.BorderRadius = 0;
-            this.b_Hotels.ButtonText = "Find Rooms";
-            this.b_Hotels.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuTransition1.SetDecoration(this.b_Hotels, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            this.b_Hotels.DisabledColor = System.Drawing.Color.Gray;
-            this.b_Hotels.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_Hotels.Iconcolor = System.Drawing.Color.Transparent;
-            this.b_Hotels.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_search_48;
-            this.b_Hotels.Iconimage_right = null;
-            this.b_Hotels.Iconimage_right_Selected = null;
-            this.b_Hotels.Iconimage_Selected = null;
-            this.b_Hotels.IconMarginLeft = 0;
-            this.b_Hotels.IconMarginRight = 0;
-            this.b_Hotels.IconRightVisible = true;
-            this.b_Hotels.IconRightZoom = 0D;
-            this.b_Hotels.IconVisible = true;
-            this.b_Hotels.IconZoom = 90D;
-            this.b_Hotels.IsTab = false;
-            this.b_Hotels.Location = new System.Drawing.Point(0, 166);
-            this.b_Hotels.Name = "b_Hotels";
-            this.b_Hotels.Normalcolor = System.Drawing.Color.Empty;
-            this.b_Hotels.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
-            this.b_Hotels.OnHoverTextColor = System.Drawing.Color.White;
-            this.b_Hotels.selected = false;
-            this.b_Hotels.Size = new System.Drawing.Size(201, 61);
-            this.b_Hotels.TabIndex = 47;
-            this.b_Hotels.Text = "Find Rooms";
-            this.b_Hotels.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.b_Hotels.Textcolor = System.Drawing.Color.White;
-            this.b_Hotels.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.b_Hotels.Click += new System.EventHandler(this.B_Hotels_Click);
-            // 
-            // b_UnocupiedRooms
-            // 
-            this.b_UnocupiedRooms.Active = false;
-            this.b_UnocupiedRooms.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
-            this.b_UnocupiedRooms.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.b_UnocupiedRooms.BorderRadius = 0;
-            this.b_UnocupiedRooms.ButtonText = "Not Boocked";
-            this.b_UnocupiedRooms.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuTransition1.SetDecoration(this.b_UnocupiedRooms, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            this.b_UnocupiedRooms.DisabledColor = System.Drawing.Color.Gray;
-            this.b_UnocupiedRooms.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_UnocupiedRooms.Iconcolor = System.Drawing.Color.Transparent;
-            this.b_UnocupiedRooms.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_generic_book_file_type_48;
-            this.b_UnocupiedRooms.Iconimage_right = null;
-            this.b_UnocupiedRooms.Iconimage_right_Selected = null;
-            this.b_UnocupiedRooms.Iconimage_Selected = null;
-            this.b_UnocupiedRooms.IconMarginLeft = 0;
-            this.b_UnocupiedRooms.IconMarginRight = 0;
-            this.b_UnocupiedRooms.IconRightVisible = true;
-            this.b_UnocupiedRooms.IconRightZoom = 0D;
-            this.b_UnocupiedRooms.IconVisible = true;
-            this.b_UnocupiedRooms.IconZoom = 90D;
-            this.b_UnocupiedRooms.IsTab = false;
-            this.b_UnocupiedRooms.Location = new System.Drawing.Point(0, 288);
-            this.b_UnocupiedRooms.Name = "b_UnocupiedRooms";
-            this.b_UnocupiedRooms.Normalcolor = System.Drawing.Color.Empty;
-            this.b_UnocupiedRooms.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
-            this.b_UnocupiedRooms.OnHoverTextColor = System.Drawing.Color.White;
-            this.b_UnocupiedRooms.selected = false;
-            this.b_UnocupiedRooms.Size = new System.Drawing.Size(201, 61);
-            this.b_UnocupiedRooms.TabIndex = 48;
-            this.b_UnocupiedRooms.Text = "Not Boocked";
-            this.b_UnocupiedRooms.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.b_UnocupiedRooms.Textcolor = System.Drawing.Color.White;
-            this.b_UnocupiedRooms.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.b_UnocupiedRooms.Click += new System.EventHandler(this.B_UnocupiedRooms_Click);
-            // 
-            // b_RoomsOcupied
-            // 
-            this.b_RoomsOcupied.Active = false;
-            this.b_RoomsOcupied.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
-            this.b_RoomsOcupied.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.b_RoomsOcupied.BorderRadius = 0;
-            this.b_RoomsOcupied.ButtonText = "Boocked";
-            this.b_RoomsOcupied.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuTransition1.SetDecoration(this.b_RoomsOcupied, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            this.b_RoomsOcupied.DisabledColor = System.Drawing.Color.Gray;
-            this.b_RoomsOcupied.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_RoomsOcupied.Iconcolor = System.Drawing.Color.Transparent;
-            this.b_RoomsOcupied.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_saving_book_48;
-            this.b_RoomsOcupied.Iconimage_right = null;
-            this.b_RoomsOcupied.Iconimage_right_Selected = null;
-            this.b_RoomsOcupied.Iconimage_Selected = null;
-            this.b_RoomsOcupied.IconMarginLeft = 0;
-            this.b_RoomsOcupied.IconMarginRight = 0;
-            this.b_RoomsOcupied.IconRightVisible = true;
-            this.b_RoomsOcupied.IconRightZoom = 0D;
-            this.b_RoomsOcupied.IconVisible = true;
-            this.b_RoomsOcupied.IconZoom = 90D;
-            this.b_RoomsOcupied.IsTab = false;
-            this.b_RoomsOcupied.Location = new System.Drawing.Point(0, 227);
-            this.b_RoomsOcupied.Name = "b_RoomsOcupied";
-            this.b_RoomsOcupied.Normalcolor = System.Drawing.Color.Empty;
-            this.b_RoomsOcupied.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
-            this.b_RoomsOcupied.OnHoverTextColor = System.Drawing.Color.White;
-            this.b_RoomsOcupied.selected = false;
-            this.b_RoomsOcupied.Size = new System.Drawing.Size(201, 61);
-            this.b_RoomsOcupied.TabIndex = 49;
-            this.b_RoomsOcupied.Text = "Boocked";
-            this.b_RoomsOcupied.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.b_RoomsOcupied.Textcolor = System.Drawing.Color.White;
-            this.b_RoomsOcupied.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.b_RoomsOcupied.Click += new System.EventHandler(this.B_Rooms_Click);
-            // 
-            // button_Reservation
-            // 
-            this.button_Reservation.Active = false;
-            this.button_Reservation.Activecolor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(90)))), ((int)(((byte)(190)))));
-            this.button_Reservation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button_Reservation.BorderRadius = 0;
-            this.button_Reservation.ButtonText = "Reserve";
-            this.button_Reservation.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.bunifuTransition1.SetDecoration(this.button_Reservation, Bunifu.UI.WinForms.BunifuTransition.DecorationType.None);
-            this.button_Reservation.DisabledColor = System.Drawing.Color.Gray;
-            this.button_Reservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Reservation.Iconcolor = System.Drawing.Color.Transparent;
-            this.button_Reservation.Iconimage = global::Managementul_Hotelurilor.Properties.Resources.icons8_reservation_48;
-            this.button_Reservation.Iconimage_right = null;
-            this.button_Reservation.Iconimage_right_Selected = null;
-            this.button_Reservation.Iconimage_Selected = null;
-            this.button_Reservation.IconMarginLeft = 0;
-            this.button_Reservation.IconMarginRight = 0;
-            this.button_Reservation.IconRightVisible = true;
-            this.button_Reservation.IconRightZoom = 0D;
-            this.button_Reservation.IconVisible = true;
-            this.button_Reservation.IconZoom = 90D;
-            this.button_Reservation.IsTab = false;
-            this.button_Reservation.Location = new System.Drawing.Point(0, 349);
-            this.button_Reservation.Name = "button_Reservation";
-            this.button_Reservation.Normalcolor = System.Drawing.Color.Empty;
-            this.button_Reservation.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(100)))), ((int)(((byte)(220)))));
-            this.button_Reservation.OnHoverTextColor = System.Drawing.Color.White;
-            this.button_Reservation.selected = false;
-            this.button_Reservation.Size = new System.Drawing.Size(201, 61);
-            this.button_Reservation.TabIndex = 50;
-            this.button_Reservation.Text = "Reserve";
-            this.button_Reservation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Reservation.Textcolor = System.Drawing.Color.White;
-            this.button_Reservation.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.button_Reservation.Click += new System.EventHandler(this.Button_Reservation_Click);
             // 
             // Form1
             // 
@@ -862,6 +895,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager_change_to_dark_or_light_mode)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.availeble_Rooms_gridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -896,6 +930,8 @@
         private Bunifu.Framework.UI.BunifuFlatButton b_UnocupiedRooms;
         private Bunifu.Framework.UI.BunifuFlatButton b_Hotels;
         private Bunifu.Framework.UI.BunifuFlatButton b_Reset;
+        private System.Windows.Forms.Panel panel_for_current_selected;
+        private Bunifu.UI.WinForms.BunifuPictureBox bunifuPictureBox1;
     }
 }
 
