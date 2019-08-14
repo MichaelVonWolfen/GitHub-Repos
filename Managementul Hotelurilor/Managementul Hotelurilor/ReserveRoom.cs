@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
 using System.Globalization;
+using System.Net;
 
 namespace Managementul_Hotelurilor
 {
@@ -17,6 +18,7 @@ namespace Managementul_Hotelurilor
     {
         private double VAT;
         private string currency;
+        private string UniqueID;
         public ReserveRoom(string Country)
         {
             InitializeComponent();
@@ -28,13 +30,28 @@ namespace Managementul_Hotelurilor
                 var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
                 var Region = regions.FirstOrDefault(region => region.EnglishName.Contains(Country));
                 currency = Region.CurrencySymbol;
+                Form1.ReserveRoom.Price = float.Parse(CurrencyConversion((decimal)Form1.ReserveRoom.Price, "USD", Region.ISOCurrencySymbol));
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+        private const string urlPattern = "http://rate-exchange-1.appspot.com/currency?from={0}&to={1}";
+        public string CurrencyConversion(decimal amount, string fromCurrency, string toCurrency)
+        {
+            string url = string.Format(urlPattern, fromCurrency, toCurrency);
 
+            using (var wc = new WebClient())
+            {
+                var json = wc.DownloadString(url);
+
+                Newtonsoft.Json.Linq.JToken token = Newtonsoft.Json.Linq.JObject.Parse(json);
+                decimal exchangeRate = (decimal)token.SelectToken("rate");
+
+                return (amount * exchangeRate).ToString();
+            }
+        }
         private void B_CommitReservation_Click(object sender, EventArgs e)
         {
             DateTime timeComming = dateComming_picker.Value;
@@ -104,6 +121,8 @@ namespace Managementul_Hotelurilor
 
                             //MessageBox.Show("Room succesfully Rented in period " + dateComming_picker.Value.ToString() + "-" + dateLeaving_picker.Value.ToString());
                             //this.Close(); 
+
+                            GenerateBarCodeinPictureBox(UniqueID,PB_Barcode);
                         }
                         catch (OracleException OE)
                         {
@@ -115,7 +134,6 @@ namespace Managementul_Hotelurilor
                     }
                 case DialogResult.No:
                     {
-
                         break;
                     }
             }
@@ -133,7 +151,8 @@ namespace Managementul_Hotelurilor
             tb_RoomID.Text = Room.Room_ID.ToString();
             tb_RoomType.Text = Room.Room_Name;
             tb_FamilyOriented.Text = Room.FamilyType;
-            tb_UniqueClientID.Text = GenerateUniqueID();
+            UniqueID = GenerateUniqueID();
+            tb_UniqueClientID.Text = UniqueID;
 
             double price = AddVAT(Room.Price, VAT);
             //TO DO: Add checker for switz pricing
@@ -165,7 +184,7 @@ namespace Managementul_Hotelurilor
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
                 mail.From = new MailAddress("hotelmanagement8.2019@gmail.com");
-                mail.To.Add("mihai_stoica66@yahoo.com");
+                mail.To.Add("mihai.stoica98@gmail.com");
                 mail.Subject = "Confirm Reservation.";
                 mail.Body = String.Format("\tWe happily confirm your reservation in room {0}, in the Hotel {1}," +
                                             "with is {2} that costs {3} {8} per day." +
@@ -189,19 +208,24 @@ namespace Managementul_Hotelurilor
         {
             DAL.Log.WriteCSV(rent_Rooms, rooms);
         }
+        #region VAT Calculator region
         private double AddVAT(double costWithoutVAT, double VAT)
         {
             double costWithVAT;
             costWithVAT = costWithoutVAT * (1 + VAT / 100);
-            if (costWithVAT - (int)costWithVAT > 0.5)
-                return (int)costWithVAT + 0.5;
-            else
-                return (int)costWithVAT;
+            return AproximatePrice(costWithVAT);
             
+        }
+        private double AproximatePrice(double price)
+        {
+            if (price * 10 - (int)(price * 10) > 0.5)
+                return ((int)(price*10) + 0.5)/10;
+            else
+                return ((int)price*10)/10;
         }
         private double GetFullPrice(double price)
         {
-            return price * (dateLeaving_picker.Value - dateComming_picker.Value).TotalDays;
+            return AproximatePrice(price * (dateLeaving_picker.Value - dateComming_picker.Value).TotalDays);
         }
         private double GetFullPriceWithVAT(double price, double VAT)
         {
@@ -219,16 +243,122 @@ namespace Managementul_Hotelurilor
             tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price), currency);
         }
 
-        private void B_calculator_Click(object sender, EventArgs e)
+        #endregion
+        private void GenerateBarCodeinPictureBox(string code,PictureBox box)
+        {
+            Zen.Barcode.Code128BarcodeDraw barcodeDraw = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
+            box.Image = barcodeDraw.Draw(code, box.Height);
+        }
+        #region Calculator Region 
+
+        private double ManualCalculation = 0.0;
+        private string operand = null;
+        bool calculation_made = false;
+        private void AddNumber(object sender, EventArgs e)
         {
             try
             {
-                tb_Manually_CalculatedFullPrice.Text = String.Format("{0} {1}", AddVAT(Double.Parse(tb_ManualPrice.Text), Double.Parse(tb_ManualVAT.Text)), currency);
+                int number = int.Parse(((Bunifu.UI.WinForms.BunifuButton.BunifuButton)sender).ButtonText);
+                for(int i = 0; i <= 9; i++)
+                {
+                    if (calculation_made)
+                        ClearScreen();
+                    if (i == number)
+                    {
+                        string t = tb_Manually_CalculatedFullPrice.Text;
+                        t += number;
+                        tb_Manually_CalculatedFullPrice.Text = t;
+                    }
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show("Error occured.");
+                DAL.Log.LogMessage(ex);
+            }
+            
+        }
 
+        private void OperandClick(object sender, EventArgs e)
+        {
+            string[] operands = { "x", "--", "+", "/" };
+           
+            foreach (string s in operands)
+            {
+                if ((sender as Bunifu.UI.WinForms.BunifuButton.BunifuButton).ButtonText == s)
+                    if (operand == null)
+                    {
+                        ManualCalculation = double.Parse(tb_Manually_CalculatedFullPrice.Text);
+                        tb_Manually_CalculatedFullPrice.Text = null;
+                        tb_Manually_CalculatedFullPrice.TextPlaceholder = ManualCalculation.ToString();
+                        operand = s;
+                    }
+                    else
+                    {
+                        AddCalculation();
+                        operand = s;
+                    }
+            }
+            
+
+        }
+        private double Calculate(double n1, double n2,string operand)
+        {
+            switch (operand)
+            {
+                case "+":
+                    return n1 + n2;
+                case "--":
+                    return n1 - n2;
+                case "x":
+                    return n1 * n2;
+                case "/":
+                    return n1 / n2;
+                default:
+                    {
+                        MessageBox.Show("Error with operands");
+                        return 0.0;
+                    }
             }
         }
+        private void AddCalculation()
+        {
+            ManualCalculation = Calculate(ManualCalculation, double.Parse(tb_Manually_CalculatedFullPrice.Text), operand);
+            tb_Manually_CalculatedFullPrice.Text = ManualCalculation.ToString();
+            calculation_made = true;
+        }
+        private void ClearScreen()
+        {
+            tb_Manually_CalculatedFullPrice.Text = null;
+            calculation_made = false;
+
+        }
+        private void Operand_equal_Click(object sender, EventArgs e)
+        {
+            if ((sender as Bunifu.UI.WinForms.BunifuButton.BunifuButton).ButtonText == "=")
+            {
+                AddCalculation();
+                operand = null;
+            }
+        }
+
+        private void OperandPointClick(object sender, EventArgs e)
+        {
+            if ((sender as Bunifu.UI.WinForms.BunifuButton.BunifuButton).ButtonText == ".")
+            {
+                string t = tb_Manually_CalculatedFullPrice.Text;
+                t += ".";
+                tb_Manually_CalculatedFullPrice.Text = t;
+            }
+        }
+
+        private void ClearScreenClick(object sender, EventArgs e)
+        {
+            tb_Manually_CalculatedFullPrice.TextPlaceholder = "";
+            operand = null;
+            ManualCalculation = 0.0;
+            ClearScreen();
+        }
+        #endregion
     }
 }

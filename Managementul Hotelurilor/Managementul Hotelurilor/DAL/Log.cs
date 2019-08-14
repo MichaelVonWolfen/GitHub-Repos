@@ -62,5 +62,31 @@ namespace Managementul_Hotelurilor.DAL
             }
         }
 
+        internal static void LogMessage(Exception exception)
+        {
+            string path = @"Logs.txt";
+            if (File.Exists(path))
+            {
+                using (var logFile = new StreamWriter(path, true))
+                {
+                    var macAddr =
+                        (
+                            from nic in NetworkInterface.GetAllNetworkInterfaces()
+                            where nic.OperationalStatus == OperationalStatus.Up
+                            select nic.GetPhysicalAddress().ToString()
+                        ).FirstOrDefault();
+                    logFile.WriteLine(DateTime.UtcNow.ToString() + "\t\t" + macAddr + "\t\t" + exception.Message +
+                                        "\t\t" + exception.StackTrace + "\t\t" + "Not an Oracle exception.");
+                }
+            }
+            else
+            {
+                using (var logFile = new StreamWriter(path, true))
+                {
+                    logFile.WriteLine("Date Time:\t\t\tMac Adress:\t\t\tError Message:\t\t\tStack:\t\t\tError: \n\n");
+                }
+                LogMessage(exception);
+            }
+        }
     }
 }
