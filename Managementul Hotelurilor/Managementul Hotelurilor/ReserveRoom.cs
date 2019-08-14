@@ -19,6 +19,7 @@ namespace Managementul_Hotelurilor
         private double VAT;
         private string currency;
         private string UniqueID;
+        private string country_name;
         public ReserveRoom(string Country)
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace Managementul_Hotelurilor
                 var Region = regions.FirstOrDefault(region => region.EnglishName.Contains(Country));
                 currency = Region.CurrencySymbol;
                 Form1.ReserveRoom.Price = float.Parse(CurrencyConversion((decimal)Form1.ReserveRoom.Price, "USD", Region.ISOCurrencySymbol));
+                country_name = Country;
             }
             catch(Exception ex)
             {
@@ -218,10 +220,12 @@ namespace Managementul_Hotelurilor
         }
         private double AproximatePrice(double price)
         {
-            if (price * 10 - (int)(price * 10) > 0.5)
-                return ((int)(price*10) + 0.5)/10;
-            else
-                return ((int)price*10)/10;
+            if (country_name == "Switzerland")
+                if (price * 10 - (int)(price * 10) > 0.5)
+                    return Convert.ToDouble((Convert.ToInt32(price * 10)) + 0.5) / 10;
+                else
+                    return Convert.ToDouble(Convert.ToInt32(price * 10)) / 10;
+            else return Convert.ToDouble(Convert.ToInt32(price * 100)) / 100;
         }
         private double GetFullPrice(double price)
         {

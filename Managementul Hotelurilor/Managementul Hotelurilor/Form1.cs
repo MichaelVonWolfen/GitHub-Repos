@@ -218,7 +218,7 @@ namespace Managementul_Hotelurilor
                         ReserveRoom.Hotel_ID = Int32.Parse(row.Cells["Hotel ID"].Value.ToString());
                         ReserveRoom.Status = row.Cells["Status"].Value.ToString();
                         ReserveRoom.Room_ID = Int32.Parse(row.Cells["RoomID"].Value.ToString());
-                        ReserveRoom.Price = Int32.Parse(row.Cells["Price"].Value.ToString());
+                        ReserveRoom.Price = Int32.Parse(row.Cells["Price($)"].Value.ToString());
 
                         FormCollection fc = Application.OpenForms;
 
