@@ -46,6 +46,9 @@
     <Reference Include="Bunifu.UI.WinForms.BunifuButton">
       <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuButton.dll</HintPath>
     </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuCheckBox">
+      <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuCheckBox.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuDataGridView">
       <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuDataGridView.dll</HintPath>
     </Reference>
@@ -75,6 +78,9 @@
     </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuTransition">
       <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.BunifuTransition.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.ToggleSwitch">
+      <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu.UI.WinForms.ToggleSwitch.dll</HintPath>
     </Reference>
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\..\..\Desktop\Bunifu_UI_WinForms_1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu UI WinForms 1.9.0.0\Bunifu_UI_v1.5.3.dll</HintPath>
@@ -134,6 +140,7 @@
     <Compile Include="DAL\DAL_Hotels.cs" />
     <Compile Include="DAL\Dal_HotelServices.cs" />
     <Compile Include="DAL\Dal_Locations.cs" />
+    <Compile Include="DAL\Dal_RentCars.cs" />
     <Compile Include="DAL\Dal_Rent_Rooms.cs" />
     <Compile Include="DAL\Dal_Rooms.cs" />
     <Compile Include="DAL\DatabaseConection.cs" />
@@ -143,6 +150,7 @@
     <Compile Include="Entities\Hotels.cs" />
     <Compile Include="Entities\Hotel_Services.cs" />
     <Compile Include="Entities\Locations.cs" />
+    <Compile Include="Entities\RentCars.cs" />
     <Compile Include="Entities\Rent_Rooms.cs" />
     <Compile Include="Entities\Rooms.cs" />
     <Compile Include="Form1.cs">

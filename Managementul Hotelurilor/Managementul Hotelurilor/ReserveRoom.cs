@@ -20,6 +20,9 @@ namespace Managementul_Hotelurilor
         private string currency;
         private string UniqueID;
         private string country_name;
+        private float Rent_Car_Price = 0;
+        private readonly string Standard_currency = "USD";
+        private bool alreadyGeneratedID;
         public ReserveRoom(string Country)
         {
             InitializeComponent();
@@ -28,18 +31,26 @@ namespace Managementul_Hotelurilor
                 //List<RegionInfo> Reg = new List<RegionInfo>();
 
                 VAT = DAL.GlobalDictionary.Vat[Country];
-                var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
-                var Region = regions.FirstOrDefault(region => region.EnglishName.Contains(Country));
-                currency = Region.CurrencySymbol;
-                Form1.ReserveRoom.Price = float.Parse(CurrencyConversion((decimal)Form1.ReserveRoom.Price, "USD", Region.ISOCurrencySymbol));
+
+                Form1.ReserveRoom.Price = float.Parse(CurrencyConversion((decimal)Form1.ReserveRoom.Price, Standard_currency, GetHotelRegionCurrencyISO(Country)));
                 country_name = Country;
+                Label_Barcode.Text = null;
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+        string GetHotelRegionCurrencyISO(string Country)
+        {
+            var regions = CultureInfo.GetCultures(CultureTypes.SpecificCultures).Select(x => new RegionInfo(x.LCID));
+            var Region = regions.FirstOrDefault(region => region.EnglishName.Contains(Country));
+            currency = Region.CurrencySymbol;
+
+            return Region.ISOCurrencySymbol;
+        }
         private const string urlPattern = "http://rate-exchange-1.appspot.com/currency?from={0}&to={1}";
+
         public string CurrencyConversion(decimal amount, string fromCurrency, string toCurrency)
         {
             string url = string.Format(urlPattern, fromCurrency, toCurrency);
@@ -95,13 +106,13 @@ namespace Managementul_Hotelurilor
         private void AddConfirmationRichTextbox(Entities.Rent_Rooms rented_Room)
         {
             richTextBox_ConfReservationOrShowError.ForeColor = Color.FromArgb(52, 106, 237);
-            richTextBox_ConfReservationOrShowError.Text = String.Format("Confirm Reservation!\n" +
-                                                  "User: UNDEFINED TODO :P\n" +
-                                                  "Room ID: " + rented_Room.ROOM_ID + "\n" +
-                                                  "Date Coming: " + rented_Room.START_DATE + "\n" +
-                                                  "DateLeaving: " + rented_Room.END_DATE + "\n" +
+            richTextBox_ConfReservationOrShowError.Text = String.Format("\t\t\t\t\tConfirm Reservation!\n" +
+                                                  "User: UNDEFINED TODO :P\n\n" +
+                                                  "Room ID: " + rented_Room.ROOM_ID + "\n\n" +
+                                                  "Date Coming: " + rented_Room.START_DATE + "\n\n" +
+                                                  "DateLeaving: " + rented_Room.END_DATE + "\n\n" +
                                                   "Reservation Identifier:" + rented_Room.ReservationID + "\n\n" +
-                                                  "Total Cost: " + AddVAT(Form1.ReserveRoom.Price, VAT) + " " + currency);
+                                                  "\t\t\t\t\tTotal Cost: " + AddVAT(Form1.ReserveRoom.Price + Rent_Car_Price, VAT) + " " + currency);
         }
         private void MakeReservation()
         {
@@ -153,13 +164,19 @@ namespace Managementul_Hotelurilor
             tb_RoomID.Text = Room.Room_ID.ToString();
             tb_RoomType.Text = Room.Room_Name;
             tb_FamilyOriented.Text = Room.FamilyType;
-            UniqueID = GenerateUniqueID();
-            tb_UniqueClientID.Text = UniqueID;
 
-            double price = AddVAT(Room.Price, VAT);
+            if (!alreadyGeneratedID)
+            {
+                UniqueID = GenerateUniqueID();
+                tb_UniqueClientID.Text = UniqueID;
+            }
+            double price = AddVAT(Room.Price + Rent_Car_Price, VAT);
             //TO DO: Add checker for switz pricing
             tb_Price.Text = (price).ToString() +" "+ currency;
-            
+
+            tb_FullPrice.Text = string.Format("{0} {1}", GetFullPriceWithVAT(Form1.ReserveRoom.Price + Rent_Car_Price, VAT), currency);
+            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price + Rent_Car_Price), currency);
+
 
 
         }
@@ -173,9 +190,11 @@ namespace Managementul_Hotelurilor
         {
             FormBorderStyle = FormBorderStyle.None;
             AllTextboxReservation_Update();
+            alreadyGeneratedID = true;
             richTextBox_ConfReservationOrShowError.Text = "";
             dateComming_picker.CustomFormat = "dd MMM yyyy";
             dateLeaving_picker.CustomFormat = "dd MMM yyyy";
+            Switch_CarRent.Value = false;
         }
 
         private void SendEmail()
@@ -194,8 +213,8 @@ namespace Managementul_Hotelurilor
                                             "\n\n\t\t\tTotal Price:{7} {8}\n" +
                                             "\nFor any issues please use your order ID when contacting us: {6}" +
                                             "\n\n Have a nice day! :)",
-                                            Room.Room_ID,DAL.GlobalDictionary.HotelsDictionary[Room.Hotel_ID], Room.FamilyType, AddVAT(Room.Price, VAT), dateComming_picker.Value.ToString("dd MM yyyy"), dateLeaving_picker.Value.ToString("dd MM yyyy"),
-                                            tb_UniqueClientID.Text,GetFullPriceWithVAT(Room.Price,VAT), currency);
+                                            Room.Room_ID,DAL.GlobalDictionary.HotelsDictionary[Room.Hotel_ID], Room.FamilyType, AddVAT(Room.Price + Rent_Car_Price, VAT), dateComming_picker.Value.ToString("dd MM yyyy"), dateLeaving_picker.Value.ToString("dd MM yyyy"),
+                                            tb_UniqueClientID.Text,GetFullPriceWithVAT(Room.Price + Rent_Car_Price, VAT), currency);
 
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("hotelmanagement8.2019", "HotelManagement#1");
@@ -237,14 +256,14 @@ namespace Managementul_Hotelurilor
         }
         private void DateLeaving_picker_ValueChanged(object sender, EventArgs e)
         {
-            tb_FullPrice.Text = string.Format("{0} {1}",GetFullPriceWithVAT(Form1.ReserveRoom.Price, VAT),currency);
-            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price), currency);
+            tb_FullPrice.Text = string.Format("{0} {1}",GetFullPriceWithVAT(Form1.ReserveRoom.Price + Rent_Car_Price, VAT),currency);
+            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price + Rent_Car_Price), currency);
         }
 
         private void DateComming_picker_ValueChanged(object sender, EventArgs e)
         {
-            tb_FullPrice.Text = string.Format("{0} {1}", GetFullPriceWithVAT(Form1.ReserveRoom.Price, VAT), currency);
-            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price), currency);
+            tb_FullPrice.Text = string.Format("{0} {1}", GetFullPriceWithVAT(Form1.ReserveRoom.Price+ Rent_Car_Price, VAT), currency);
+            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price + Rent_Car_Price), currency);
         }
 
         #endregion
@@ -252,6 +271,7 @@ namespace Managementul_Hotelurilor
         {
             Zen.Barcode.Code128BarcodeDraw barcodeDraw = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
             box.Image = barcodeDraw.Draw(code, box.Height);
+            Label_Barcode.Text = code;
         }
         #region Calculator Region 
 
@@ -363,6 +383,69 @@ namespace Managementul_Hotelurilor
             ManualCalculation = 0.0;
             ClearScreen();
         }
+
         #endregion
+
+        private void Switch_CarRent_OnValuechange(object sender, EventArgs e)
+        {
+            if (Switch_CarRent.Value == true)
+            {
+                comboBox_selectCarType.Enabled = true;
+                //Call procedure to get all data for renting cars
+                try
+                {
+                    DAL.Dal_RentCars.Get_Cars_Rent(Form1.ReserveRoom.Hotel_ID);
+
+                }
+                catch (OracleException ex)
+                {
+                    DAL.Log.LogMessage(ex);
+                }
+                comboBox_selectCarType.Sorted = true;
+                foreach (Entities.RentCars cars in DAL.Dal_RentCars.Rents)
+                {
+                    comboBox_selectCarType.Items.Add(GetAproximatedPriceString(cars));
+                }
+            }
+            else if (Switch_CarRent.Value == false)
+            {
+                comboBox_selectCarType.Enabled = false;
+                comboBox_selectCarType.Text = null;
+                comboBox_selectCarType.Items.Clear();
+                Rent_Car_Price = 0;
+                AllTextboxReservation_Update();
+            }
+        }
+        string GetAproximatedPriceString(Entities.RentCars cars)
+        {
+            return String.Format("{0} ({1} {2})", cars.CAR_NAME_TYPE,
+                                                    AproximatePrice(Convert.ToDouble(CurrencyConversion(Convert.ToDecimal(cars.RENT_PRICE), Standard_currency, GetHotelRegionCurrencyISO(country_name)))),
+                                                    currency);
+        }
+        private void ComboBox_selectCarType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Get price of car from combobox
+           
+            foreach (var rent in DAL.Dal_RentCars.Rents)
+            {
+                if (comboBox_selectCarType.Text == GetAproximatedPriceString(rent))
+                {
+                    Rent_Car_Price = rent.RENT_PRICE;
+                }
+            }
+            AllTextboxReservation_Update();
+        }
+
+        private void BunifuLabel13_Click(object sender, EventArgs e)
+        {
+            //TODO: Add Terms and Conditions
+        }
+
+        private void Check_TermsAndConditions_CheckedChanged(object sender, Bunifu.UI.WinForms.BunifuCheckBox.CheckedChangedEventArgs e)
+        {
+            if (Check_TermsAndConditions.Checked == true)
+                b_CommitReservation.Enabled = true;
+            else b_CommitReservation.Enabled = false;
+        }
     }
 }

@@ -402,6 +402,39 @@
         MSvErBCzQswKMSvErBCzQswKMSvErBCzQswKGfNc91tgM+e6f9jCJPbv5o18AAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="Label_Barcode.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 1.2px; font-family: 'Microsoft Sans Serif'; font-size: 15pt; width: 100%; height: 100%; font-style: normal; font-weight: normal; text-decoration: none; color: Black; text-align: left; }</value>
+  </data>
+  <data name="bunifuLabel12.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 1.2px; font-family: 'Microsoft Sans Serif'; font-size: 8.25pt; width: 100%; height: 100%; font-style: normal; font-weight: normal; text-decoration: none; color: #346AED; text-align: left; }</value>
+  </data>
+  <data name="bunifuLabel11.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 1.2px; font-family: 'Microsoft Sans Serif'; font-size: 8.25pt; width: 100%; height: 100%; font-style: normal; font-weight: normal; text-decoration: none; color: #346AED; text-align: left; }</value>
+  </data>
+  <data name="Switch_CarRent.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAUCAYAAAAHpoRMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFtSURBVEhLzVY9T8MwEPXIyNiRf0BV22JkZUKM3WBBxM4A
+        P4GdrQN7ZyQ2VlZGxmygjk3OSSs+BUO5SywV0hND2zg96SmKfT4/ne13JzjTdtxRUdrXEVzJ2D0q62ar
+        guL0YnetLZzsnRU7fqv/Tdv0VBoH0uZTZYENvDRMiRdloEByl37LRds9L7aRxAMyn7CB1g3jXvGbsFki
+        IsiYX9gsRvvHz1ueRnU0wTJSgzTZB34Hnsi4Q3ek7hQS0gAgjy4eTxYpm79xTuEAM3q5An+Ga381S4Du
+        LF3cpw0h806ZYSfbwGaRwSedcROhIS18CxXndy2JXR2JUBFcIJlPZjIcsGZRESXR66LOtKK+c8AE9e6o
+        VGEcGHhZZhyD4L4kQkaFCgdGNYcwMG5KJclTqaw8LgMppuyLXdQEkIiKskNP4a9RT4MOt9T8NKPKVUxq
+        3Ej+FzLCmbbuABdhzXLJPNDqoNKjjbuhltZv9cuE+AGx61VOXAOTNgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="Check_TermsAndConditions.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACUSURBVDhPY6ApsI+/z2Gc+TrDOPNtAznYJONNgWnWSwmo
+        cQwM+vnvBUwy37w3yXr7nxJsnPX2O9BgA7ChIBdCJN7cx+YKYjBQ/3GIwa8roIaCBf+DaLAAGQDDjFFD
+        Rw0dNXTUULAAGQCnoUC8H8QmB4P0ohgKKlihhlKMgWVzANhQEDDNeuuBbjup2CTjVQQDAwMDAEBgt5GF
+        r5MsAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="bunifuLabel13.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 1.2px; font-family: 'Microsoft Sans Serif'; font-size: 8.25pt; width: 100%; height: 100%; font-style: normal; font-weight: normal; text-decoration: none; color: #346AED; text-align: left; }</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAkAAAAAAAEAIADvBwAAlgAAAICAAAABACAAKAgBAIUIAABgYAAAAQAgAKiUAACtEAEASEgAAAEA
