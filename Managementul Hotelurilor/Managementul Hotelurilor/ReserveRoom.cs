@@ -1,16 +1,12 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Net.Mail;
 using System.Globalization;
+using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Windows.Forms;
 
 namespace Managementul_Hotelurilor
 {
@@ -20,9 +16,10 @@ namespace Managementul_Hotelurilor
         private string currency;
         private string UniqueID;
         private string country_name;
-        private float Rent_Car_Price = 0;
+        private Entities.RentCars rentedCar = null;
         private readonly string Standard_currency = "USD";
         private bool alreadyGeneratedID;
+        private string Car;
         public ReserveRoom(string Country)
         {
             InitializeComponent();
@@ -36,7 +33,7 @@ namespace Managementul_Hotelurilor
                 country_name = Country;
                 Label_Barcode.Text = null;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -70,12 +67,12 @@ namespace Managementul_Hotelurilor
             DateTime timeComming = dateComming_picker.Value;
             DateTime timeLeaving = dateLeaving_picker.Value;
             //if time coming> timeleaving => Error (you can't leave before you come
-            if(tb_FamilyOriented.Text == "" || tb_Hotel.Text == "" || tb_RoomID.Text == "" || tb_RoomType.Text == "")
+            if (tb_FamilyOriented.Text == "" || tb_Hotel.Text == "" || tb_RoomID.Text == "" || tb_RoomType.Text == "")
             {
                 MessageBox.Show("ERROR!\nNo Room selected.");
                 return;
             }
-            if(timeLeaving.CompareTo(timeComming) < 0)
+            if (timeLeaving.CompareTo(timeComming) < 0)
             {
                 richTextBox_ConfReservationOrShowError.ForeColor = Color.Red;
                 richTextBox_ConfReservationOrShowError.Text = "Error:\n" + timeComming.ToString("dd MMM yyyy") + " greater than " + timeLeaving.Date.ToString("dd MMM yyyy") +
@@ -101,29 +98,54 @@ namespace Managementul_Hotelurilor
                     }
             }
             //TO DO:check if room availeble and show a Response
-           //TO DO: If room availeble save in a new table
+            //TO DO: If room availeble save in a new table
         }
         private void AddConfirmationRichTextbox(Entities.Rent_Rooms rented_Room)
         {
+            if (Switch_CarRent.Value == true)
+            {
+                Car = string.Format("Car rented: {0}.", comboBox_selectCarType.Text);
+            }
+            else
+            {
+                Car = "No car selected";
+            }
             richTextBox_ConfReservationOrShowError.ForeColor = Color.FromArgb(52, 106, 237);
             richTextBox_ConfReservationOrShowError.Text = String.Format("\t\t\t\t\tConfirm Reservation!\n" +
                                                   "User: UNDEFINED TODO :P\n\n" +
-                                                  "Room ID: " + rented_Room.ROOM_ID + "\n\n" +
-                                                  "Date Coming: " + rented_Room.START_DATE + "\n\n" +
+                                                  "Room ID: " + rented_Room.ROOM_ID + "\n" +
+                                                  "Date Coming: " + rented_Room.START_DATE + "\n" +
                                                   "DateLeaving: " + rented_Room.END_DATE + "\n\n" +
+                                                  Car + "\n\n" +
                                                   "Reservation Identifier:" + rented_Room.ReservationID + "\n\n" +
-                                                  "\t\t\t\t\tTotal Cost: " + AddVAT(Form1.ReserveRoom.Price + Rent_Car_Price, VAT) + " " + currency);
+                                                  "\t\t\t\t\tTotal Cost: " + AddVAT(Form1.ReserveRoom.Price + GetCarPrice(), VAT) + " " + currency);
+            //TODO: ADD Details of car to facture and e-mail and add to database tha fact that a car is rented.
+        }
+        double GetCarPrice()
+        {
+            if (rentedCar == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return rentedCar.RENT_PRICE;
+            }
         }
         private void MakeReservation()
         {
-            switch(MessageBox.Show("Making reservation?", "Room available", MessageBoxButtons.YesNo))
+            switch (MessageBox.Show("Making reservation?", "Room available", MessageBoxButtons.YesNo))
             {
                 case DialogResult.Yes:
                     {
                         try
                         {
-                            Entities.Rent_Rooms rent = new Entities.Rent_Rooms(dateComming_picker.Value, dateLeaving_picker.Value, Int32.Parse(tb_RoomID.Text),tb_UniqueClientID.Text);
-                            DAL.Dal_Rent_Rooms.InsertRenter(rent);
+                            Entities.Rent_Rooms rent = new Entities.Rent_Rooms(dateComming_picker.Value, dateLeaving_picker.Value, Int32.Parse(tb_RoomID.Text), tb_UniqueClientID.Text);
+                            if (rentedCar != null)
+                                DAL.Dal_Rent_Rooms.InsertRenter(rent, rentedCar);
+                            else
+                                DAL.Dal_Rent_Rooms.InsertRenter(rent, null);
+
                             AddConfirmationRichTextbox(rent);
 
                             //DONE: Send a confirmation email
@@ -135,7 +157,7 @@ namespace Managementul_Hotelurilor
                             //MessageBox.Show("Room succesfully Rented in period " + dateComming_picker.Value.ToString() + "-" + dateLeaving_picker.Value.ToString());
                             //this.Close(); 
 
-                            GenerateBarCodeinPictureBox(UniqueID,PB_Barcode);
+                            GenerateBarCodeinPictureBox(UniqueID, PB_Barcode);
                         }
                         catch (OracleException OE)
                         {
@@ -170,12 +192,12 @@ namespace Managementul_Hotelurilor
                 UniqueID = GenerateUniqueID();
                 tb_UniqueClientID.Text = UniqueID;
             }
-            double price = AddVAT(Room.Price + Rent_Car_Price, VAT);
+            double price = AddVAT(Room.Price + GetCarPrice(), VAT);
             //TO DO: Add checker for switz pricing
-            tb_Price.Text = (price).ToString() +" "+ currency;
+            tb_Price.Text = (price).ToString() + " " + currency;
 
-            tb_FullPrice.Text = string.Format("{0} {1}", GetFullPriceWithVAT(Form1.ReserveRoom.Price + Rent_Car_Price, VAT), currency);
-            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price + Rent_Car_Price), currency);
+            tb_FullPrice.Text = string.Format("{0} {1}", GetFullPriceWithVAT(Form1.ReserveRoom.Price + GetCarPrice(), VAT), currency);
+            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price + GetCarPrice()), currency);
 
 
 
@@ -200,30 +222,31 @@ namespace Managementul_Hotelurilor
         private void SendEmail()
         {
             var Room = Form1.ReserveRoom;
-         
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-                mail.From = new MailAddress("hotelmanagement8.2019@gmail.com");
-                mail.To.Add("mihai.stoica98@gmail.com");
-                mail.Subject = "Confirm Reservation.";
-                mail.Body = String.Format("\tWe happily confirm your reservation in room {0}, in the Hotel {1}," +
-                                            "with is {2} that costs {3} {8} per day." +
-                                            "\n\t Your reservation starts on {4} and ends on {5}." +
-                                            "\n\n\t\t\tTotal Price:{7} {8}\n" +
-                                            "\nFor any issues please use your order ID when contacting us: {6}" +
-                                            "\n\n Have a nice day! :)",
-                                            Room.Room_ID,DAL.GlobalDictionary.HotelsDictionary[Room.Hotel_ID], Room.FamilyType, AddVAT(Room.Price + Rent_Car_Price, VAT), dateComming_picker.Value.ToString("dd MM yyyy"), dateLeaving_picker.Value.ToString("dd MM yyyy"),
-                                            tb_UniqueClientID.Text,GetFullPriceWithVAT(Room.Price + Rent_Car_Price, VAT), currency);
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-                SmtpServer.Port = 587;
-                SmtpServer.Credentials = new System.Net.NetworkCredential("hotelmanagement8.2019", "HotelManagement#1");
-                SmtpServer.EnableSsl = true;
+            mail.From = new MailAddress("hotelmanagement8.2019@gmail.com");
+            mail.To.Add("mihai.stoica98@gmail.com");
+            mail.Subject = "Confirm Reservation.";
+            mail.Body = String.Format("\tWe happily confirm your reservation in room {0}, in the Hotel {1}," +
+                                        "with is {2} that costs {3} {8} per day." +
+                                        "\n\t Your reservation starts on {4} and ends on {5}." +
+                                        "{9} per day" +
+                                        "\n\n\t\t\tTotal Price:{7} {8}\n" +
+                                        "\nFor any issues please use your order ID when contacting us: {6}" +
+                                        "\n\n Have a nice day! :)",
+                                        Room.Room_ID, DAL.GlobalDictionary.HotelsDictionary[Room.Hotel_ID], Room.FamilyType, AddVAT(Room.Price + GetCarPrice(), VAT), dateComming_picker.Value.ToString("dd MM yyyy"), dateLeaving_picker.Value.ToString("dd MM yyyy"),
+                                        tb_UniqueClientID.Text, GetFullPriceWithVAT(Room.Price + GetCarPrice(), VAT), currency, Car);
 
-                SmtpServer.Send(mail);
-                MessageBox.Show("Confirmation mail Sent!");
-            
-           
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("hotelmanagement8.2019", "HotelManagement#1");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+            MessageBox.Show("Confirmation mail Sent!");
+
+
         }
         private void SaveToCSV(Entities.Rent_Rooms rent_Rooms, Entities.Rooms rooms)
         {
@@ -235,7 +258,7 @@ namespace Managementul_Hotelurilor
             double costWithVAT;
             costWithVAT = costWithoutVAT * (1 + VAT / 100);
             return AproximatePrice(costWithVAT);
-            
+
         }
         private double AproximatePrice(double price)
         {
@@ -256,18 +279,18 @@ namespace Managementul_Hotelurilor
         }
         private void DateLeaving_picker_ValueChanged(object sender, EventArgs e)
         {
-            tb_FullPrice.Text = string.Format("{0} {1}",GetFullPriceWithVAT(Form1.ReserveRoom.Price + Rent_Car_Price, VAT),currency);
-            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price + Rent_Car_Price), currency);
+            tb_FullPrice.Text = string.Format("{0} {1}", GetFullPriceWithVAT(Form1.ReserveRoom.Price + GetCarPrice(), VAT), currency);
+            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price + GetCarPrice()), currency);
         }
 
         private void DateComming_picker_ValueChanged(object sender, EventArgs e)
         {
-            tb_FullPrice.Text = string.Format("{0} {1}", GetFullPriceWithVAT(Form1.ReserveRoom.Price+ Rent_Car_Price, VAT), currency);
-            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price + Rent_Car_Price), currency);
+            tb_FullPrice.Text = string.Format("{0} {1}", GetFullPriceWithVAT(Form1.ReserveRoom.Price + GetCarPrice(), VAT), currency);
+            tb_FullPriceNoVAT.Text = string.Format("{0} {1}", GetFullPrice(Form1.ReserveRoom.Price + GetCarPrice()), currency);
         }
 
         #endregion
-        private void GenerateBarCodeinPictureBox(string code,PictureBox box)
+        private void GenerateBarCodeinPictureBox(string code, PictureBox box)
         {
             Zen.Barcode.Code128BarcodeDraw barcodeDraw = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
             box.Image = barcodeDraw.Draw(code, box.Height);
@@ -283,7 +306,7 @@ namespace Managementul_Hotelurilor
             try
             {
                 int number = int.Parse(((Bunifu.UI.WinForms.BunifuButton.BunifuButton)sender).ButtonText);
-                for(int i = 0; i <= 9; i++)
+                for (int i = 0; i <= 9; i++)
                 {
                     if (calculation_made)
                         ClearScreen();
@@ -300,13 +323,13 @@ namespace Managementul_Hotelurilor
                 MessageBox.Show("Error occured.");
                 DAL.Log.LogMessage(ex);
             }
-            
+
         }
 
         private void OperandClick(object sender, EventArgs e)
         {
             string[] operands = { "x", "--", "+", "/" };
-           
+
             foreach (string s in operands)
             {
                 if ((sender as Bunifu.UI.WinForms.BunifuButton.BunifuButton).ButtonText == s)
@@ -323,10 +346,10 @@ namespace Managementul_Hotelurilor
                         operand = s;
                     }
             }
-            
+
 
         }
-        private double Calculate(double n1, double n2,string operand)
+        private double Calculate(double n1, double n2, string operand)
         {
             switch (operand)
             {
@@ -411,8 +434,8 @@ namespace Managementul_Hotelurilor
             {
                 comboBox_selectCarType.Enabled = false;
                 comboBox_selectCarType.Text = null;
+                rentedCar = null;
                 comboBox_selectCarType.Items.Clear();
-                Rent_Car_Price = 0;
                 AllTextboxReservation_Update();
             }
         }
@@ -425,12 +448,13 @@ namespace Managementul_Hotelurilor
         private void ComboBox_selectCarType_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Get price of car from combobox
-           
+
             foreach (var rent in DAL.Dal_RentCars.Rents)
             {
                 if (comboBox_selectCarType.Text == GetAproximatedPriceString(rent))
                 {
-                    Rent_Car_Price = rent.RENT_PRICE;
+                    rentedCar = rent;
+                    break;
                 }
             }
             AllTextboxReservation_Update();

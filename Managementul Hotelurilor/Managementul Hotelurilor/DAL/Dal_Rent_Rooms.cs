@@ -14,7 +14,7 @@ namespace Managementul_Hotelurilor.DAL
         /// Inserts the new rented room in the table designated them
         /// </summary>
         /// <param name="renter"></param>
-        public static void InsertRenter(Entities.Rent_Rooms renter)
+        public static void InsertRenter(Entities.Rent_Rooms renter, Entities.RentCars car)
         {
             using (OracleConnection conn = DatabaseConection.GetOracleConnection())
             {
@@ -45,10 +45,26 @@ namespace Managementul_Hotelurilor.DAL
                     OP4.Direction = System.Data.ParameterDirection.Input;
                     OP4.Value = renter.ReservationID;
 
+                    OracleParameter OP5 = new OracleParameter();
+                    OP5.ParameterName = "Car";
+                    if (car != null)
+                    {
+                        OP5.OracleDbType = OracleDbType.Int32;
+                        OP5.Direction = System.Data.ParameterDirection.Input;
+                        OP5.Value = car.RENT_CARS_TYPE_ID.ToString();
+                    }
+                    else
+                    {
+                        OP5.OracleDbType = OracleDbType.Int32;
+                        OP5.Direction = System.Data.ParameterDirection.Input;
+                        OP5.Value = DBNull.Value;
+                    }
+
                     OA.Parameters.Add(OP2);
                     OA.Parameters.Add(OP3);
                     OA.Parameters.Add(OP1);
                     OA.Parameters.Add(OP4);
+                    OA.Parameters.Add(OP5);
 
 
                     OA.ExecuteNonQuery();
