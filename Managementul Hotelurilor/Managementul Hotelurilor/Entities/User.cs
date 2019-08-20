@@ -8,30 +8,27 @@ namespace Managementul_Hotelurilor.Entities
 {
     class User
     {
-        private string Username;
-        private string Password;
-        private string Email;
-        private string CardNumber;
-        private string CVV;
-        private DateTime ExpirationDate;
+        public string Username { get; }
+        public string Password { get; }
+        public string Email { get; }
 
         public User(string Username, string Password)
         {
             this.Username = Username;
             this.Password = Password;
 
+            Email = DAL.DalUsers.GetEmail(Username, Password);
             //Make method to check if the user exists 
-            //if exists then log in
+            //if exists then log in and get mail
             //else throw error
         }
-        public User(string Username,string Password,string Email,string CardNumber, string CVV, string month, string year)
+        public User(string Username,string Password,string Email)
         {
             this.Username = Username;
             this.Password = Password;
             this.Email = Email;
-            this.CardNumber = CardNumber;
-            this.CVV = CVV;
-            ExpirationDate = DateTime.Parse(month + "." + year);
+
+            //Add to database all values.
         }
     }
 }

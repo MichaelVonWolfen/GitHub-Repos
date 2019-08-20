@@ -98,6 +98,10 @@
             this.Switch_CarRent = new Bunifu.ToggleSwitch.BunifuToggleSwitch();
             this.Check_TermsAndConditions = new Bunifu.UI.WinForms.BunifuCheckBox();
             this.bunifuLabel13 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.Drop_year = new Bunifu.Framework.UI.BunifuDropdown();
+            this.drop_month = new Bunifu.Framework.UI.BunifuDropdown();
+            this.reg_cvv = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
+            this.reg_cardNumber = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Barcode)).BeginInit();
             this.SuspendLayout();
             // 
@@ -603,7 +607,7 @@
             this.richTextBox_ConfReservationOrShowError.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox_ConfReservationOrShowError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox_ConfReservationOrShowError.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
-            this.richTextBox_ConfReservationOrShowError.Location = new System.Drawing.Point(262, 301);
+            this.richTextBox_ConfReservationOrShowError.Location = new System.Drawing.Point(251, 561);
             this.richTextBox_ConfReservationOrShowError.Name = "richTextBox_ConfReservationOrShowError";
             this.richTextBox_ConfReservationOrShowError.ReadOnly = true;
             this.richTextBox_ConfReservationOrShowError.Size = new System.Drawing.Size(675, 255);
@@ -810,7 +814,7 @@
             // PB_Barcode
             // 
             this.PB_Barcode.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.PB_Barcode.Location = new System.Drawing.Point(459, 562);
+            this.PB_Barcode.Location = new System.Drawing.Point(934, 561);
             this.PB_Barcode.Name = "PB_Barcode";
             this.PB_Barcode.Size = new System.Drawing.Size(250, 250);
             this.PB_Barcode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1352,7 +1356,7 @@
             this.Label_Barcode.CursorType = null;
             this.Label_Barcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.Label_Barcode.ForeColor = System.Drawing.Color.Black;
-            this.Label_Barcode.Location = new System.Drawing.Point(457, 818);
+            this.Label_Barcode.Location = new System.Drawing.Point(932, 817);
             this.Label_Barcode.Name = "Label_Barcode";
             this.Label_Barcode.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Label_Barcode.Size = new System.Drawing.Size(135, 27);
@@ -1538,11 +1542,135 @@
             this.bunifuLabel13.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             this.bunifuLabel13.Click += new System.EventHandler(this.BunifuLabel13_Click);
             // 
+            // Drop_year
+            // 
+            this.Drop_year.BackColor = System.Drawing.Color.Transparent;
+            this.Drop_year.BorderRadius = 30;
+            this.Drop_year.DisabledColor = System.Drawing.Color.Gray;
+            this.Drop_year.ForeColor = System.Drawing.Color.White;
+            this.Drop_year.items = new string[0];
+            this.Drop_year.Location = new System.Drawing.Point(740, 293);
+            this.Drop_year.Name = "Drop_year";
+            this.Drop_year.NomalColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.Drop_year.onHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.Drop_year.selectedIndex = -1;
+            this.Drop_year.Size = new System.Drawing.Size(100, 35);
+            this.Drop_year.TabIndex = 114;
+            // 
+            // drop_month
+            // 
+            this.drop_month.BackColor = System.Drawing.Color.Transparent;
+            this.drop_month.BorderRadius = 30;
+            this.drop_month.DisabledColor = System.Drawing.Color.Gray;
+            this.drop_month.ForeColor = System.Drawing.Color.White;
+            this.drop_month.items = new string[0];
+            this.drop_month.Location = new System.Drawing.Point(616, 293);
+            this.drop_month.Name = "drop_month";
+            this.drop_month.NomalColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.drop_month.onHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.drop_month.selectedIndex = -1;
+            this.drop_month.Size = new System.Drawing.Size(100, 35);
+            this.drop_month.TabIndex = 113;
+            // 
+            // reg_cvv
+            // 
+            this.reg_cvv.AcceptsReturn = false;
+            this.reg_cvv.AcceptsTab = false;
+            this.reg_cvv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.reg_cvv.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.reg_cvv.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.reg_cvv.BackColor = System.Drawing.Color.Transparent;
+            this.reg_cvv.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reg_cvv.BackgroundImage")));
+            this.reg_cvv.BorderColorActive = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.reg_cvv.BorderColorDisabled = System.Drawing.Color.Transparent;
+            this.reg_cvv.BorderColorHover = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.reg_cvv.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.reg_cvv.BorderRadius = 30;
+            this.reg_cvv.BorderThickness = 2;
+            this.reg_cvv.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.reg_cvv.DefaultFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reg_cvv.DefaultText = "";
+            this.reg_cvv.FillColor = System.Drawing.Color.White;
+            this.reg_cvv.ForeColor = System.Drawing.Color.Black;
+            this.reg_cvv.HideSelection = true;
+            this.reg_cvv.IconLeft = null;
+            this.reg_cvv.IconLeftCursor = System.Windows.Forms.Cursors.Default;
+            this.reg_cvv.IconPadding = 10;
+            this.reg_cvv.IconRight = null;
+            this.reg_cvv.IconRightCursor = System.Windows.Forms.Cursors.Default;
+            this.reg_cvv.Location = new System.Drawing.Point(851, 293);
+            this.reg_cvv.MaxLength = 32767;
+            this.reg_cvv.MinimumSize = new System.Drawing.Size(100, 35);
+            this.reg_cvv.Modified = false;
+            this.reg_cvv.Name = "reg_cvv";
+            this.reg_cvv.PasswordChar = '\0';
+            this.reg_cvv.ReadOnly = false;
+            this.reg_cvv.SelectedText = "";
+            this.reg_cvv.SelectionLength = 0;
+            this.reg_cvv.SelectionStart = 0;
+            this.reg_cvv.ShortcutsEnabled = true;
+            this.reg_cvv.Size = new System.Drawing.Size(100, 35);
+            this.reg_cvv.Style = Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox._Style.Bunifu;
+            this.reg_cvv.TabIndex = 112;
+            this.reg_cvv.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.reg_cvv.TextMarginLeft = 5;
+            this.reg_cvv.TextPlaceholder = "CVV";
+            this.reg_cvv.UseSystemPasswordChar = false;
+            // 
+            // reg_cardNumber
+            // 
+            this.reg_cardNumber.AcceptsReturn = false;
+            this.reg_cardNumber.AcceptsTab = false;
+            this.reg_cardNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.reg_cardNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.reg_cardNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.reg_cardNumber.BackColor = System.Drawing.Color.Transparent;
+            this.reg_cardNumber.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reg_cardNumber.BackgroundImage")));
+            this.reg_cardNumber.BorderColorActive = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.reg_cardNumber.BorderColorDisabled = System.Drawing.Color.Transparent;
+            this.reg_cardNumber.BorderColorHover = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.reg_cardNumber.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(106)))), ((int)(((byte)(237)))));
+            this.reg_cardNumber.BorderRadius = 30;
+            this.reg_cardNumber.BorderThickness = 2;
+            this.reg_cardNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.reg_cardNumber.DefaultFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reg_cardNumber.DefaultText = "";
+            this.reg_cardNumber.FillColor = System.Drawing.Color.White;
+            this.reg_cardNumber.ForeColor = System.Drawing.Color.Black;
+            this.reg_cardNumber.HideSelection = true;
+            this.reg_cardNumber.IconLeft = null;
+            this.reg_cardNumber.IconLeftCursor = System.Windows.Forms.Cursors.Default;
+            this.reg_cardNumber.IconPadding = 10;
+            this.reg_cardNumber.IconRight = null;
+            this.reg_cardNumber.IconRightCursor = System.Windows.Forms.Cursors.Default;
+            this.reg_cardNumber.Location = new System.Drawing.Point(259, 293);
+            this.reg_cardNumber.MaxLength = 32767;
+            this.reg_cardNumber.MinimumSize = new System.Drawing.Size(100, 35);
+            this.reg_cardNumber.Modified = false;
+            this.reg_cardNumber.Name = "reg_cardNumber";
+            this.reg_cardNumber.PasswordChar = '\0';
+            this.reg_cardNumber.ReadOnly = false;
+            this.reg_cardNumber.SelectedText = "";
+            this.reg_cardNumber.SelectionLength = 0;
+            this.reg_cardNumber.SelectionStart = 0;
+            this.reg_cardNumber.ShortcutsEnabled = true;
+            this.reg_cardNumber.Size = new System.Drawing.Size(331, 35);
+            this.reg_cardNumber.Style = Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox._Style.Bunifu;
+            this.reg_cardNumber.TabIndex = 111;
+            this.reg_cardNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.reg_cardNumber.TextMarginLeft = 5;
+            this.reg_cardNumber.TextPlaceholder = "Card  Number (XXXX-XXXX-XXXX-XXXX)";
+            this.reg_cardNumber.UseSystemPasswordChar = false;
+            // 
             // ReserveRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1207, 850);
+            this.Controls.Add(this.Drop_year);
+            this.Controls.Add(this.drop_month);
+            this.Controls.Add(this.reg_cvv);
+            this.Controls.Add(this.reg_cardNumber);
             this.Controls.Add(this.bunifuLabel13);
             this.Controls.Add(this.Check_TermsAndConditions);
             this.Controls.Add(this.bunifuLabel12);
@@ -1653,5 +1781,9 @@
         private Bunifu.ToggleSwitch.BunifuToggleSwitch Switch_CarRent;
         private Bunifu.UI.WinForms.BunifuCheckBox Check_TermsAndConditions;
         private Bunifu.UI.WinForms.BunifuLabel bunifuLabel13;
+        private Bunifu.Framework.UI.BunifuDropdown Drop_year;
+        private Bunifu.Framework.UI.BunifuDropdown drop_month;
+        private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox reg_cvv;
+        private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox reg_cardNumber;
     }
 }

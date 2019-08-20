@@ -14,6 +14,9 @@ namespace Managementul_Hotelurilor
     public partial class LogInForm : Bunifu.Framework.UI.BunifuForm
     {
         private List<BunifuGradientPanel> Panels;
+        private string CardNumber;
+        private string CVV;
+        private DateTime ExpirationDate;
         public LogInForm()
         {
             InitializeComponent();
@@ -27,21 +30,7 @@ namespace Managementul_Hotelurilor
 
             Panels[0].Hide();
 
-            drop_month.Items.Add("Month");
-            drop_month.SelectedItem("Month");
-            Drop_year.Items.Add("Year");
-            Drop_year.SelectedItem("Year");
-
-            int year = DateTime.Now.Year;
-
-            for (int i = 0; i <= 10; i++)
-            {
-                Drop_year.Items.Add(year + i);
-            }
-            for (int i = 1; i <= 12; i++)
-            {
-                drop_month.Items.Add(i);
-            }
+            
         }
 
         private void BunifuTextBox1_TextChange(object sender, EventArgs e)
@@ -54,12 +43,13 @@ namespace Managementul_Hotelurilor
             try
             {
                 Entities.User user = new Entities.User(tb_Username.Text, Tb_password.Text);
-
+                
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                DAL.Log.LogMessage(ex);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -80,13 +70,21 @@ namespace Managementul_Hotelurilor
             //Registration area
             try
             {
-                Entities.User user = new Entities.User(reg_username.Text, reg_password.Text, reg_email.Text,reg_cardNumber.Text, reg_cvv.Text, drop_month.selectedValue, Drop_year.selectedValue);
+                Entities.User user = new Entities.User(reg_username.Text, reg_password.Text, reg_email.Text);
+                DAL.DalUsers.AddNewUser(user);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                DAL.Log.LogMessage(ex);
+                MessageBox.Show("Error while adding user! Try again later.");
+                Application.Exit();
             }
+        }
+
+        private void RegisterPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

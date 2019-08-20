@@ -217,6 +217,22 @@ namespace Managementul_Hotelurilor
             dateComming_picker.CustomFormat = "dd MMM yyyy";
             dateLeaving_picker.CustomFormat = "dd MMM yyyy";
             Switch_CarRent.Value = false;
+
+            drop_month.Items.Add("Month");
+            drop_month.SelectedItem("Month");
+            Drop_year.Items.Add("Year");
+            Drop_year.SelectedItem("Year");
+
+            int year = DateTime.Now.Year;
+
+            for (int i = 0; i <= 10; i++)
+            {
+                Drop_year.Items.Add(year + i);
+            }
+            for (int i = 1; i <= 12; i++)
+            {
+                drop_month.Items.Add(i);
+            }
         }
 
         private void SendEmail()

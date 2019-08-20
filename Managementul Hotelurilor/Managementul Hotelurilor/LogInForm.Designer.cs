@@ -40,10 +40,6 @@
             this.registerPanel = new Bunifu.Framework.UI.BunifuGradientPanel();
             this.Registration_btn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.bunifuFlatButton4 = new Bunifu.Framework.UI.BunifuFlatButton();
-            this.Drop_year = new Bunifu.Framework.UI.BunifuDropdown();
-            this.drop_month = new Bunifu.Framework.UI.BunifuDropdown();
-            this.reg_cvv = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
-            this.reg_cardNumber = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
             this.reg_email = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
             this.reg_conf_passowrd = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
             this.reg_password = new Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox();
@@ -267,10 +263,6 @@
             this.registerPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.registerPanel.Controls.Add(this.Registration_btn);
             this.registerPanel.Controls.Add(this.bunifuFlatButton4);
-            this.registerPanel.Controls.Add(this.Drop_year);
-            this.registerPanel.Controls.Add(this.drop_month);
-            this.registerPanel.Controls.Add(this.reg_cvv);
-            this.registerPanel.Controls.Add(this.reg_cardNumber);
             this.registerPanel.Controls.Add(this.reg_email);
             this.registerPanel.Controls.Add(this.reg_conf_passowrd);
             this.registerPanel.Controls.Add(this.reg_password);
@@ -286,6 +278,7 @@
             this.registerPanel.Quality = 10;
             this.registerPanel.Size = new System.Drawing.Size(1049, 787);
             this.registerPanel.TabIndex = 45;
+            this.registerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.RegisterPanel_Paint);
             // 
             // Registration_btn
             // 
@@ -311,7 +304,7 @@
             this.Registration_btn.IconVisible = true;
             this.Registration_btn.IconZoom = 90D;
             this.Registration_btn.IsTab = false;
-            this.Registration_btn.Location = new System.Drawing.Point(569, 608);
+            this.Registration_btn.Location = new System.Drawing.Point(279, 618);
             this.Registration_btn.Name = "Registration_btn";
             this.Registration_btn.Normalcolor = System.Drawing.Color.Teal;
             this.Registration_btn.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
@@ -349,7 +342,7 @@
             this.bunifuFlatButton4.IconVisible = true;
             this.bunifuFlatButton4.IconZoom = 90D;
             this.bunifuFlatButton4.IsTab = false;
-            this.bunifuFlatButton4.Location = new System.Drawing.Point(279, 608);
+            this.bunifuFlatButton4.Location = new System.Drawing.Point(552, 618);
             this.bunifuFlatButton4.Name = "bunifuFlatButton4";
             this.bunifuFlatButton4.Normalcolor = System.Drawing.Color.Teal;
             this.bunifuFlatButton4.OnHovercolor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
@@ -362,126 +355,6 @@
             this.bunifuFlatButton4.Textcolor = System.Drawing.Color.White;
             this.bunifuFlatButton4.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.bunifuFlatButton4.Click += new System.EventHandler(this.BunifuFlatButton4_Click);
-            // 
-            // Drop_year
-            // 
-            this.Drop_year.BackColor = System.Drawing.Color.Transparent;
-            this.Drop_year.BorderRadius = 30;
-            this.Drop_year.DisabledColor = System.Drawing.Color.Gray;
-            this.Drop_year.ForeColor = System.Drawing.Color.White;
-            this.Drop_year.items = new string[0];
-            this.Drop_year.Location = new System.Drawing.Point(413, 379);
-            this.Drop_year.Name = "Drop_year";
-            this.Drop_year.NomalColor = System.Drawing.Color.Transparent;
-            this.Drop_year.onHoverColor = System.Drawing.Color.Transparent;
-            this.Drop_year.selectedIndex = -1;
-            this.Drop_year.Size = new System.Drawing.Size(105, 35);
-            this.Drop_year.TabIndex = 72;
-            // 
-            // drop_month
-            // 
-            this.drop_month.BackColor = System.Drawing.Color.Transparent;
-            this.drop_month.BorderRadius = 30;
-            this.drop_month.DisabledColor = System.Drawing.Color.Gray;
-            this.drop_month.ForeColor = System.Drawing.Color.White;
-            this.drop_month.items = new string[0];
-            this.drop_month.Location = new System.Drawing.Point(289, 379);
-            this.drop_month.Name = "drop_month";
-            this.drop_month.NomalColor = System.Drawing.Color.Transparent;
-            this.drop_month.onHoverColor = System.Drawing.Color.Transparent;
-            this.drop_month.selectedIndex = -1;
-            this.drop_month.Size = new System.Drawing.Size(105, 35);
-            this.drop_month.TabIndex = 71;
-            // 
-            // reg_cvv
-            // 
-            this.reg_cvv.AcceptsReturn = false;
-            this.reg_cvv.AcceptsTab = false;
-            this.reg_cvv.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.reg_cvv.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.reg_cvv.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.reg_cvv.BackColor = System.Drawing.Color.Transparent;
-            this.reg_cvv.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reg_cvv.BackgroundImage")));
-            this.reg_cvv.BorderColorActive = System.Drawing.Color.Teal;
-            this.reg_cvv.BorderColorDisabled = System.Drawing.Color.Transparent;
-            this.reg_cvv.BorderColorHover = System.Drawing.Color.Teal;
-            this.reg_cvv.BorderColorIdle = System.Drawing.Color.Teal;
-            this.reg_cvv.BorderRadius = 30;
-            this.reg_cvv.BorderThickness = 2;
-            this.reg_cvv.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.reg_cvv.DefaultFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reg_cvv.DefaultText = "";
-            this.reg_cvv.FillColor = System.Drawing.Color.White;
-            this.reg_cvv.ForeColor = System.Drawing.Color.Black;
-            this.reg_cvv.HideSelection = true;
-            this.reg_cvv.IconLeft = null;
-            this.reg_cvv.IconLeftCursor = System.Windows.Forms.Cursors.Default;
-            this.reg_cvv.IconPadding = 10;
-            this.reg_cvv.IconRight = null;
-            this.reg_cvv.IconRightCursor = System.Windows.Forms.Cursors.Default;
-            this.reg_cvv.Location = new System.Drawing.Point(524, 379);
-            this.reg_cvv.MaxLength = 32767;
-            this.reg_cvv.MinimumSize = new System.Drawing.Size(100, 35);
-            this.reg_cvv.Modified = false;
-            this.reg_cvv.Name = "reg_cvv";
-            this.reg_cvv.PasswordChar = '\0';
-            this.reg_cvv.ReadOnly = false;
-            this.reg_cvv.SelectedText = "";
-            this.reg_cvv.SelectionLength = 0;
-            this.reg_cvv.SelectionStart = 0;
-            this.reg_cvv.ShortcutsEnabled = true;
-            this.reg_cvv.Size = new System.Drawing.Size(245, 35);
-            this.reg_cvv.Style = Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox._Style.Bunifu;
-            this.reg_cvv.TabIndex = 70;
-            this.reg_cvv.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.reg_cvv.TextMarginLeft = 5;
-            this.reg_cvv.TextPlaceholder = "CVV";
-            this.reg_cvv.UseSystemPasswordChar = false;
-            // 
-            // reg_cardNumber
-            // 
-            this.reg_cardNumber.AcceptsReturn = false;
-            this.reg_cardNumber.AcceptsTab = false;
-            this.reg_cardNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.reg_cardNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.reg_cardNumber.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.reg_cardNumber.BackColor = System.Drawing.Color.Transparent;
-            this.reg_cardNumber.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("reg_cardNumber.BackgroundImage")));
-            this.reg_cardNumber.BorderColorActive = System.Drawing.Color.Teal;
-            this.reg_cardNumber.BorderColorDisabled = System.Drawing.Color.Transparent;
-            this.reg_cardNumber.BorderColorHover = System.Drawing.Color.Teal;
-            this.reg_cardNumber.BorderColorIdle = System.Drawing.Color.Teal;
-            this.reg_cardNumber.BorderRadius = 30;
-            this.reg_cardNumber.BorderThickness = 2;
-            this.reg_cardNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.reg_cardNumber.DefaultFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reg_cardNumber.DefaultText = "";
-            this.reg_cardNumber.FillColor = System.Drawing.Color.White;
-            this.reg_cardNumber.ForeColor = System.Drawing.Color.Black;
-            this.reg_cardNumber.HideSelection = true;
-            this.reg_cardNumber.IconLeft = null;
-            this.reg_cardNumber.IconLeftCursor = System.Windows.Forms.Cursors.Default;
-            this.reg_cardNumber.IconPadding = 10;
-            this.reg_cardNumber.IconRight = null;
-            this.reg_cardNumber.IconRightCursor = System.Windows.Forms.Cursors.Default;
-            this.reg_cardNumber.Location = new System.Drawing.Point(279, 338);
-            this.reg_cardNumber.MaxLength = 32767;
-            this.reg_cardNumber.MinimumSize = new System.Drawing.Size(100, 35);
-            this.reg_cardNumber.Modified = false;
-            this.reg_cardNumber.Name = "reg_cardNumber";
-            this.reg_cardNumber.PasswordChar = '\0';
-            this.reg_cardNumber.ReadOnly = false;
-            this.reg_cardNumber.SelectedText = "";
-            this.reg_cardNumber.SelectionLength = 0;
-            this.reg_cardNumber.SelectionStart = 0;
-            this.reg_cardNumber.ShortcutsEnabled = true;
-            this.reg_cardNumber.Size = new System.Drawing.Size(490, 35);
-            this.reg_cardNumber.Style = Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox._Style.Bunifu;
-            this.reg_cardNumber.TabIndex = 69;
-            this.reg_cardNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.reg_cardNumber.TextMarginLeft = 5;
-            this.reg_cardNumber.TextPlaceholder = "Card  Number (XXXX-XXXX-XXXX-XXXX)";
-            this.reg_cardNumber.UseSystemPasswordChar = false;
             // 
             // reg_email
             // 
@@ -707,10 +580,6 @@
         private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox reg_password;
         private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox reg_username;
         private Bunifu.Framework.UI.BunifuCustomLabel label_Register;
-        private Bunifu.Framework.UI.BunifuDropdown Drop_year;
-        private Bunifu.Framework.UI.BunifuDropdown drop_month;
-        private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox reg_cvv;
-        private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox reg_cardNumber;
         private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox reg_email;
         private Bunifu.UI.WinForms.BunifuTextbox.BunifuTextBox reg_conf_passowrd;
         private Bunifu.Framework.UI.BunifuFlatButton Registration_btn;
